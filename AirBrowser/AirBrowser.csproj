@@ -85,9 +85,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="1476480235_architecture-interior-19.ico" />
+    <None Include="Graphics\bar.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Graphics\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

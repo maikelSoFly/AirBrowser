@@ -91,6 +91,7 @@ namespace AirBrowser
            
             newButton.Text = index.ToString();
             newButton.Size = new Size(tabWidth, 29);
+           
             newButton.TextAlign = ContentAlignment.MiddleLeft;
             newButton.FlatStyle = FlatStyle.Flat;
             newButton.FlatAppearance.BorderSize = 0;
@@ -102,7 +103,7 @@ namespace AirBrowser
             buttons.Add(newButton);
             pages.Add(newButton);
             Controls.Add(newButton);
-            
+            newButton.BringToFront();
             indexOfSelectedButton = buttons.Count-1;
             pos = pos + tabWidth;
             index++;
@@ -114,9 +115,7 @@ namespace AirBrowser
 
         private void WebTab_DocumentTitleChanged(object sender, EventArgs e)
         {
-           
             buttons[indexOfSelectedButton].Text = webTab.DocumentTitle;
-            
         }
 
         private void NewButton_MouseDown(object sender, MouseEventArgs e)
@@ -234,10 +233,10 @@ namespace AirBrowser
 
         private void button1_Click(object sender, EventArgs e)
         {
-            pos = pos - tabWidth;
-            
+           
             if (tabControl.TabPages.Count-1 > 0)
             {
+                pos = pos - tabWidth;
                 int removeIndex = tabControl.SelectedIndex;
                
                 Controls.Remove(pages[removeIndex]);
@@ -247,8 +246,9 @@ namespace AirBrowser
 
                 tabControl.TabPages.RemoveAt(tabControl.SelectedIndex);
                 tabControl.SelectTab(tabControl.TabPages.Count-1);
- 
+                ChangeButtonStyleToBackground(buttons.Count - 1);
             }
+            
         }
 
         private void txtNavigate_MouseEnter(object sender, EventArgs e)
@@ -333,6 +333,10 @@ namespace AirBrowser
             ((WebBrowser)tabControl.SelectedTab.Controls[0]).Navigate("https://facebook.com");
         }
 
+        private void btnYahoo_Click(object sender, EventArgs e)
+        {
+            ((WebBrowser)tabControl.SelectedTab.Controls[0]).Navigate("https://yahoo.com");
+        }
     }
 }
 
