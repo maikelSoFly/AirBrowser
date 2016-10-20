@@ -12,27 +12,31 @@ namespace AirBrowser
 {
     public partial class Form1 : Form
     {
-        int tabButtonsCounter = 0;
-        int lastSelectedTabButton;
-
+       
         public Form1()
         {
             InitializeComponent();
         }
-    
-        void getFavicon ()
-        {
-            
-        }
+
+        static int pos = 0;
+        int index = 0;
+        int tabWidth = 200;
+        List<Button> buttons = new List<Button>();
+        List<Button> pages = new List<Button>();
+        int indexOfSelectedButton = 0;
+        bool isMouseUp = false;
+        int newLocationX;
 
         private void Form1_Load(object sender, EventArgs e)
         {
             btnNewTab_Click(sender, e);                 // Create new (first) tab
+            tabControl.Controls.RemoveAt(0);
             txtHttps.Text = "https://";
             // Hide original tabs buttons
             tabControl.Appearance = TabAppearance.FlatButtons;
             tabControl.ItemSize = new Size(0, 1);
             tabControl.SizeMode = TabSizeMode.Fixed;
+           
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -61,7 +65,6 @@ namespace AirBrowser
             if (web != null)
             {
                 web.Navigate(txtNavigate.Text);
-                txtNavigate.Text = txtNavigate.Text;
             }
         }
 
@@ -69,18 +72,10 @@ namespace AirBrowser
       
         private void btnNewTab_Click(object sender, EventArgs e)
         {
+            
+            
 
-            foreach (Button ctl in flpTabPanel.Controls)
-            {
-                if (ctl.TabIndex == lastSelectedTabButton)
-                {
-                    ctl.BackColor = Color.Gainsboro;
-                    ctl.FlatAppearance.BorderColor = Color.Gainsboro;
-                }
-
-            }
             TabPage tab = new TabPage();
-            tab.Text = "New Tab";
             tabControl.Controls.Add(tab);
             tabControl.SelectTab(tabControl.TabCount-1);
             webTab = new WebBrowser() { ScriptErrorsSuppressed = true };
@@ -89,71 +84,133 @@ namespace AirBrowser
             webTab.Navigate("https://google.com");
             txtNavigate.Text = "www.google.com";
 
-            //
-            // Tab button style
-            //
-            Button button = new Button();
-            button.Name = "tabButton" + tabButtonsCounter++;
-            button.Text = "New Tab";
-            button.Size = new Size(100, 25);
-            button.Margin = new System.Windows.Forms.Padding(0);
-            button.Click += Button_Click;
-            button.FlatStyle = FlatStyle.Flat;
-            button.FlatAppearance.BorderColor = Color.Silver; 
-            button.TextAlign = ContentAlignment.MiddleLeft;
-            button.BackColor = Color.White;
-            flpTabPanel.Controls.Add(button);
-            lastSelectedTabButton = button.TabIndex;
-            
-            webTab.DocumentCompleted += WebTab_DocumentCompleted;
-        }
 
-        private void Button_Click(object sender, EventArgs e)
-        {
-            foreach (Button ctl in flpTabPanel.Controls)
-            {
-                if (ctl.TabIndex == lastSelectedTabButton)
-                {
-                    ctl.BackColor = Color.Gainsboro;
-                    ctl.FlatAppearance.BorderColor = Color.Gainsboro;
-                }
-            }
+            // My Panel
+            Button newButton = new Button();
+            newButton.Name = index.ToString();
+           
+            newButton.Text = index.ToString();
+            newButton.Size = new Size(tabWidth, 29);
+            newButton.TextAlign = ContentAlignment.MiddleLeft;
+            newButton.FlatStyle = FlatStyle.Flat;
+            newButton.FlatAppearance.BorderSize = 0;
+            newButton.Location = new Point(pos, 0);
+            newButton.Click += NewButton_Click;
+            newButton.MouseUp += NewButton_MouseUp;
+            newButton.MouseMove += NewButton_MouseMove;
+            newButton.MouseDown += NewButton_MouseDown;
+            buttons.Add(newButton);
+            pages.Add(newButton);
+            Controls.Add(newButton);
             
-            Button button = sender as Button;
-            tabControl.SelectedIndex = button.TabIndex+1;
-            button.BackColor = Color.White;
-            button.FlatAppearance.BorderColor = Color.Silver;
-            lastSelectedTabButton = button.TabIndex;
-            string fullUrL = Convert.ToString(((WebBrowser)tabControl.SelectedTab.Controls[0]).Url);
-            string shortenUrl = fullUrL.Remove(0, 7);
-            txtNavigate.Text = shortenUrl;
+            indexOfSelectedButton = buttons.Count-1;
+            pos = pos + tabWidth;
+            index++;
+            ChangeButtonStyleToBackground(buttons.IndexOf(newButton));
+
+            webTab.DocumentCompleted += WebTab_DocumentCompleted;
             webTab.DocumentTitleChanged += WebTab_DocumentTitleChanged;
         }
 
         private void WebTab_DocumentTitleChanged(object sender, EventArgs e)
         {
+           
+            buttons[indexOfSelectedButton].Text = webTab.DocumentTitle;
             
-            foreach (Control ctl in flpTabPanel.Controls)
+        }
+
+        private void NewButton_MouseDown(object sender, MouseEventArgs e)
+        {
+            isMouseUp = true;
+        }
+
+        private void swap(List<Button> list, int indexA, int indexB)
+        {
+            Button tmp = list[indexB];
+            list[indexB] = list[indexA];
+            list[indexA] = tmp;
+            for (int i = 0; i < list.Count; i++)
             {
-              if (tabControl.SelectedIndex.Equals(ctl.TabIndex+1))
-               {
-                    ctl.Text = webTab.DocumentTitle;
-               }
+                if (i != indexA)
+                    list[i].Location = new Point(i * tabWidth, list[i].Location.Y);
             }
         }
+
+        private void NewButton_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isMouseUp)
+            {
+                Button button = sender as Button;
+                newLocationX = tabWidth * (buttons.IndexOf(button) + 1);
+                button.BringToFront();
+                button.Location = new Point(button.Location.X + e.Location.X - (tabWidth/2), button.Location.Y);
+
+                for (int i = 0; i < buttons.Count; i++)
+                {
+                    if (button.Location.X < buttons[i].Location.X + (tabWidth / 2))
+                    {
+                        swap(buttons, buttons.IndexOf(button), i);
+                        break;
+                    }
+
+                }
+                for (int i = buttons.Count - 1; i > 0; --i)
+                {
+                    if ((button.Location.X > buttons[i].Location.X) && buttons.IndexOf(button) < i)
+                    {
+                        swap(buttons, i, buttons.IndexOf(button));
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void NewButton_MouseUp(object sender, MouseEventArgs e)
+        {
+            isMouseUp = false;
+            Button button = sender as Button;
+            newLocationX = tabWidth * buttons.IndexOf(button);
+            button.Location = new Point(newLocationX, button.Location.Y);
+        }
+
+        private void NewButton_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            indexOfSelectedButton = buttons.IndexOf(button);
+            tabControl.SelectedIndex = pages.IndexOf(button);
+            indexOfSelectedButton = buttons.IndexOf(button);
+            ShowValidUrl();
+
+            ChangeButtonStyleToBackground(buttons.IndexOf(button));
+         
+        }
+
+        private void ChangeButtonStyleToBackground(int index)
+        {
+            for (int i = 0; i < buttons.Count; i++)
+            {
+                if (i != index)
+                    buttons[i].BackColor = Color.Gainsboro;
+                else buttons[i].BackColor = Color.White;
+            }
+        }
+
+
+        private void ShowValidUrl()
+        {
+            string fullUrL = Convert.ToString(((WebBrowser)tabControl.SelectedTab.Controls[0]).Url);
+            string shortenUrl = fullUrL.Remove(0, 7);
+            txtNavigate.Text = shortenUrl;
+        }
+
 
         private void WebTab_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             tabControl.SelectedTab.Text = ((WebBrowser)tabControl.SelectedTab.Controls[0]).DocumentTitle;
-            foreach (Control ctl in flpTabPanel.Controls)
-            {
-                if (tabControl.SelectedIndex.Equals(ctl.TabIndex+1))
-                    ctl.Text = ((WebBrowser)tabControl.SelectedTab.Controls[0]).DocumentTitle;
-            }
             
-            string fullURL = Convert.ToString(((WebBrowser)tabControl.SelectedTab.Controls[0]).Url);
-            string shortenURL = fullURL.Remove(0, 7);
-            txtNavigate.Text = shortenURL;
+            buttons[indexOfSelectedButton].Text = webTab.DocumentTitle;
+            
+            ShowValidUrl();
             tabControl.Focus();
         }
 
@@ -165,34 +222,32 @@ namespace AirBrowser
                 if (web != null)
                 {
                     web.Navigate(txtNavigate.Text);
-                    txtNavigate.Text = txtNavigate.Text;
                 }
             }
         }
 
+        private void Reposition ()
+        {
+            for (int i = 0; i < buttons.Count; i++)
+                buttons[i].Location = new Point(i * tabWidth, buttons[i].Location.Y);
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            if (tabControl.TabPages.Count -2 > 0)
+            pos = pos - tabWidth;
+            
+            if (tabControl.TabPages.Count-1 > 0)
             {
-                int removedIndex = tabControl.SelectedIndex - 1;
-                flpTabPanel.Controls.RemoveAt(removedIndex);
-                foreach (Control ctl in flpTabPanel.Controls)
-                {
-                    if (ctl.TabIndex > removedIndex)
-                        ctl.TabIndex--;
-                }
+                int removeIndex = tabControl.SelectedIndex;
+               
+                Controls.Remove(pages[removeIndex]);
+                buttons.Remove(pages[removeIndex]);
+                pages.RemoveAt(removeIndex);
+                Reposition();
+
                 tabControl.TabPages.RemoveAt(tabControl.SelectedIndex);
-                
                 tabControl.SelectTab(tabControl.TabPages.Count-1);
-                foreach (Button ctl in flpTabPanel.Controls)
-                {
-                    if (ctl.TabIndex == flpTabPanel.Controls.Count-1)
-                    {
-                        ctl.BackColor = Color.White;
-                        ctl.FlatAppearance.BorderColor = Color.Silver;
-                        lastSelectedTabButton = ctl.TabIndex;
-                    }
-                } 
+ 
             }
         }
 
@@ -262,8 +317,6 @@ namespace AirBrowser
         {
             location = btnNavigate.Location.X;
         }
-
-      
 
         private void btn9gag_Click(object sender, EventArgs e)
         {
