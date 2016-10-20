@@ -45,18 +45,13 @@
             this.btnFb = new System.Windows.Forms.Button();
             this.btn9gag = new System.Windows.Forms.Button();
             this.btnTwitch = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.historyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.findToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnBack = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnYahoo = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.picGradient = new System.Windows.Forms.PictureBox();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
-            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picGradient)).BeginInit();
             this.SuspendLayout();
@@ -68,7 +63,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.ItemSize = new System.Drawing.Size(100, 0);
-            this.tabControl.Location = new System.Drawing.Point(-4, 79);
+            this.tabControl.Location = new System.Drawing.Point(-4, 58);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(1285, 644);
@@ -237,44 +232,6 @@
             this.btnTwitch.UseVisualStyleBackColor = false;
             this.btnTwitch.Click += new System.EventHandler(this.btnTwitch_Click);
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.menuStrip1.BackColor = System.Drawing.Color.White;
-            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.menuStrip1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuToolStripMenuItem});
-            this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.menuStrip1.Location = new System.Drawing.Point(1216, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.menuStrip1.Size = new System.Drawing.Size(58, 24);
-            this.menuStrip1.TabIndex = 15;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // menuToolStripMenuItem
-            // 
-            this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.historyToolStripMenuItem,
-            this.findToolStripMenuItem});
-            this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
-            this.menuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
-            this.menuToolStripMenuItem.Text = "Menu";
-            // 
-            // historyToolStripMenuItem
-            // 
-            this.historyToolStripMenuItem.Name = "historyToolStripMenuItem";
-            this.historyToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.historyToolStripMenuItem.Text = "History";
-            // 
-            // findToolStripMenuItem
-            // 
-            this.findToolStripMenuItem.Name = "findToolStripMenuItem";
-            this.findToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.findToolStripMenuItem.Text = "Find";
-            // 
             // btnBack
             // 
             this.btnBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(135)))), ((int)(((byte)(220)))));
@@ -291,6 +248,20 @@
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
+            // btnYahoo
+            // 
+            this.btnYahoo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
+            this.btnYahoo.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
+            this.btnYahoo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnYahoo.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnYahoo.Location = new System.Drawing.Point(604, 32);
+            this.btnYahoo.Name = "btnYahoo";
+            this.btnYahoo.Size = new System.Drawing.Size(73, 30);
+            this.btnYahoo.TabIndex = 16;
+            this.btnYahoo.Text = "Yahoo";
+            this.btnYahoo.UseVisualStyleBackColor = false;
+            this.btnYahoo.Click += new System.EventHandler(this.btnYahoo_Click);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
@@ -300,25 +271,14 @@
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             // 
-            // btnYahoo
-            // 
-            this.btnYahoo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
-            this.btnYahoo.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
-            this.btnYahoo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnYahoo.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnYahoo.Location = new System.Drawing.Point(603, 32);
-            this.btnYahoo.Name = "btnYahoo";
-            this.btnYahoo.Size = new System.Drawing.Size(73, 30);
-            this.btnYahoo.TabIndex = 16;
-            this.btnYahoo.Text = "Yahoo";
-            this.btnYahoo.UseVisualStyleBackColor = false;
-            this.btnYahoo.Click += new System.EventHandler(this.btnYahoo_Click);
-            // 
             // picGradient
             // 
+            this.picGradient.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.picGradient.BackgroundImage = global::AirBrowser.Properties.Resources.bar1;
             this.picGradient.Location = new System.Drawing.Point(-4, 0);
             this.picGradient.Name = "picGradient";
-            this.picGradient.Size = new System.Drawing.Size(1285, 73);
+            this.picGradient.Size = new System.Drawing.Size(1285, 63);
             this.picGradient.TabIndex = 17;
             this.picGradient.TabStop = false;
             // 
@@ -339,9 +299,8 @@
             this.Controls.Add(this.btnFb);
             this.Controls.Add(this.btnTwitch);
             this.Controls.Add(this.btn9gag);
-            this.Controls.Add(this.tabControl);
-            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.picGradient);
+            this.Controls.Add(this.tabControl);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
@@ -351,8 +310,6 @@
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picGradient)).EndInit();
             this.ResumeLayout(false);
@@ -380,10 +337,6 @@
         private System.Windows.Forms.Button btnFb;
         private System.Windows.Forms.Button btnTwitch;
         private System.Windows.Forms.Button btn9gag;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem historyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem findToolStripMenuItem;
         private System.Windows.Forms.Button btnYahoo;
         private System.Windows.Forms.PictureBox picGradient;
     }

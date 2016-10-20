@@ -90,12 +90,12 @@ namespace AirBrowser
             newButton.Name = index.ToString();
            
             newButton.Text = index.ToString();
-            newButton.Size = new Size(tabWidth, 29);
-           
+            newButton.Size = new Size(tabWidth, 31);
             newButton.TextAlign = ContentAlignment.MiddleLeft;
             newButton.FlatStyle = FlatStyle.Flat;
+            newButton.ForeColor = Color.DimGray;
             newButton.FlatAppearance.BorderSize = 0;
-            newButton.Location = new Point(pos, 0);
+            newButton.Location = new Point(pos, -1);
             newButton.Click += NewButton_Click;
             newButton.MouseUp += NewButton_MouseUp;
             newButton.MouseMove += NewButton_MouseMove;
@@ -105,7 +105,7 @@ namespace AirBrowser
             Controls.Add(newButton);
             newButton.BringToFront();
             indexOfSelectedButton = buttons.Count-1;
-            pos = pos + tabWidth;
+            pos = pos + tabWidth + 1;
             index++;
             ChangeButtonStyleToBackground(buttons.IndexOf(newButton));
 
@@ -140,7 +140,7 @@ namespace AirBrowser
             if (isMouseUp)
             {
                 Button button = sender as Button;
-                newLocationX = tabWidth * (buttons.IndexOf(button) + 1);
+                newLocationX = (tabWidth * (buttons.IndexOf(button) + 1));
                 button.BringToFront();
                 button.Location = new Point(button.Location.X + e.Location.X - (tabWidth/2), button.Location.Y);
 
@@ -189,8 +189,15 @@ namespace AirBrowser
             for (int i = 0; i < buttons.Count; i++)
             {
                 if (i != index)
+                {
                     buttons[i].BackColor = Color.Gainsboro;
-                else buttons[i].BackColor = Color.White;
+                    buttons[i].ForeColor = Color.DimGray;
+                }
+                else
+                {
+                    buttons[i].BackColor = Color.White;
+                    buttons[i].ForeColor = Color.Black;
+                }
             }
         }
 
@@ -228,7 +235,7 @@ namespace AirBrowser
         private void Reposition ()
         {
             for (int i = 0; i < buttons.Count; i++)
-                buttons[i].Location = new Point(i * tabWidth, buttons[i].Location.Y);
+                buttons[i].Location = new Point((i * tabWidth)+1, buttons[i].Location.Y);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -236,7 +243,7 @@ namespace AirBrowser
            
             if (tabControl.TabPages.Count-1 > 0)
             {
-                pos = pos - tabWidth;
+                pos = pos - tabWidth-1;
                 int removeIndex = tabControl.SelectedIndex;
                
                 Controls.Remove(pages[removeIndex]);
