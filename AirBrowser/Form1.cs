@@ -88,13 +88,13 @@ namespace AirBrowser
             // My Panel
             Button newButton = new Button();
             newButton.Name = index.ToString();
-           
+            newButton.FlatAppearance.BorderColor = Color.LightGray;
             newButton.Text = index.ToString();
             newButton.Size = new Size(tabWidth, 31);
             newButton.TextAlign = ContentAlignment.MiddleLeft;
             newButton.FlatStyle = FlatStyle.Flat;
             newButton.ForeColor = Color.DimGray;
-            newButton.FlatAppearance.BorderSize = 0;
+            newButton.FlatAppearance.BorderSize = 1;
             newButton.Location = new Point(pos, -1);
             newButton.Click += NewButton_Click;
             newButton.MouseUp += NewButton_MouseUp;
@@ -105,7 +105,7 @@ namespace AirBrowser
             Controls.Add(newButton);
             newButton.BringToFront();
             indexOfSelectedButton = buttons.Count-1;
-            pos = pos + tabWidth + 1;
+            pos = pos + tabWidth;
             index++;
             ChangeButtonStyleToBackground(buttons.IndexOf(newButton));
 
@@ -115,7 +115,7 @@ namespace AirBrowser
 
         private void WebTab_DocumentTitleChanged(object sender, EventArgs e)
         {
-            buttons[indexOfSelectedButton].Text = webTab.DocumentTitle;
+            buttons[indexOfSelectedButton].Text = ((WebBrowser)tabControl.SelectedTab.Controls[0]).Document.Title;
         }
 
         private void NewButton_MouseDown(object sender, MouseEventArgs e)
@@ -153,6 +153,7 @@ namespace AirBrowser
                     }
 
                 }
+
                 for (int i = buttons.Count - 1; i > 0; --i)
                 {
                     if ((button.Location.X > buttons[i].Location.X) && buttons.IndexOf(button) < i)
@@ -175,11 +176,9 @@ namespace AirBrowser
         private void NewButton_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
-            indexOfSelectedButton = buttons.IndexOf(button);
             tabControl.SelectedIndex = pages.IndexOf(button);
             indexOfSelectedButton = buttons.IndexOf(button);
             ShowValidUrl();
-
             ChangeButtonStyleToBackground(buttons.IndexOf(button));
          
         }
@@ -212,10 +211,10 @@ namespace AirBrowser
 
         private void WebTab_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            tabControl.SelectedTab.Text = ((WebBrowser)tabControl.SelectedTab.Controls[0]).DocumentTitle;
-            
-            buttons[indexOfSelectedButton].Text = webTab.DocumentTitle;
-            
+           // tabControl.SelectedTab.Text = ((WebBrowser)tabControl.SelectedTab.Controls[0]).DocumentTitle;
+
+            buttons[indexOfSelectedButton].Text = ((WebBrowser)tabControl.SelectedTab.Controls[0]).Document.Title;
+
             ShowValidUrl();
             tabControl.Focus();
         }
@@ -235,7 +234,7 @@ namespace AirBrowser
         private void Reposition ()
         {
             for (int i = 0; i < buttons.Count; i++)
-                buttons[i].Location = new Point((i * tabWidth)+1, buttons[i].Location.Y);
+                buttons[i].Location = new Point(i * tabWidth, buttons[i].Location.Y);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -243,7 +242,7 @@ namespace AirBrowser
            
             if (tabControl.TabPages.Count-1 > 0)
             {
-                pos = pos - tabWidth-1;
+                pos = pos - tabWidth;
                 int removeIndex = tabControl.SelectedIndex;
                
                 Controls.Remove(pages[removeIndex]);

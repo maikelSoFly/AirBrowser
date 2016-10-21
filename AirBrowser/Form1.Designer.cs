@@ -155,15 +155,15 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.Red;
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(12)))), ((int)(((byte)(12)))));
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Segoe UI Black", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button1.Location = new System.Drawing.Point(341, 30);
+            this.button1.Location = new System.Drawing.Point(342, 35);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(32, 32);
+            this.button1.Size = new System.Drawing.Size(22, 22);
             this.button1.TabIndex = 9;
             this.button1.Text = "x";
             this.button1.UseVisualStyleBackColor = false;
