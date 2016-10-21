@@ -63,6 +63,26 @@ namespace AirBrowser.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap addButton {
+            get {
+                object obj = ResourceManager.GetObject("addButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap addButtonHighlight {
+            get {
+                object obj = ResourceManager.GetObject("addButtonHighlight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap bar {
             get {
                 object obj = ResourceManager.GetObject("bar", resourceCulture);
@@ -76,6 +96,56 @@ namespace AirBrowser.Properties {
         internal static System.Drawing.Bitmap bar1 {
             get {
                 object obj = ResourceManager.GetObject("bar1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap blueButton {
+            get {
+                object obj = ResourceManager.GetObject("blueButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap blueButtonHighlight {
+            get {
+                object obj = ResourceManager.GetObject("blueButtonHighlight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap selectedTab {
+            get {
+                object obj = ResourceManager.GetObject("selectedTab", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap unselectedTab {
+            get {
+                object obj = ResourceManager.GetObject("unselectedTab", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap unselectedTabHighlight {
+            get {
+                object obj = ResourceManager.GetObject("unselectedTabHighlight", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
