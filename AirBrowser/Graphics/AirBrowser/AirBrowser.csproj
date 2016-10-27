@@ -64,17 +64,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animation.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Methods.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -105,12 +99,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Graphics\btnForward.png" />
-    <None Include="Graphics\btnHome.png" />
-    <None Include="Graphics\btnForwardHighLight.png" />
-    <None Include="Graphics\btnHomeHighlight.png" />
-    <None Include="Graphics\btnRemove.png" />
-    <None Include="Graphics\btnRemoveHighlight.png" />
+    <Content Include="1476480235_architecture-interior-19.ico" />
     <Content Include="ICON.ico" />
     <None Include="Graphics\blueButtonHighlight.png" />
     <None Include="Graphics\blueButton.png" />
@@ -122,7 +111,6 @@
     <None Include="Graphics\bar.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Headers\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>

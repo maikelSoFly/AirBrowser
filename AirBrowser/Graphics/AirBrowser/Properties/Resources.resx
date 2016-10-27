@@ -118,17 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="blueButtonHighlight" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Graphics\blueButtonHighlight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="unselectedTabHighlight" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Graphics\unselectedTabHighlight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="selectedTab" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Graphics\selectedTab.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="btnForward" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Graphics\btnForward.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="addButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Graphics\addButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="unselectedTab" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Graphics\unselectedTab.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -145,25 +139,10 @@
   <data name="addButtonHighlight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Graphics\addButtonHighlight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="btnHome" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Graphics\btnHome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="unselectedTabHighlight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Graphics\unselectedTabHighlight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="addButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Graphics\addButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="btnForwardHighLight" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Graphics\btnForwardHighLight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="btnHome1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Graphics\btnHome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="btnHomeHighlight" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Graphics\btnHomeHighlight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="btnRemove" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Graphics\btnRemove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="btnRemoveHighlight" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Graphics\btnRemoveHighlight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="blueButtonHighlight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Graphics\blueButtonHighlight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

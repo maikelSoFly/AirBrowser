@@ -11,22 +11,42 @@ using System.Windows.Forms;
 namespace AirBrowser
 {
 
+   
+
 
     public partial class Form1 : Form
     {
-        
+       
         public Form1()
         {
-            
             InitializeComponent();
 
         }
 
-      
+        class ColoredCombo : ComboBox
+        {
+            private const int WM_PAINT = 0xF;
+            private int buttonWidth = SystemInformation.HorizontalScrollBarArrowWidth;
+            protected override void WndProc(ref Message m)
+            {
+                base.WndProc(ref m);
+                if (m.Msg == WM_PAINT)
+                {
+                    using (var g = Graphics.FromHwnd(Handle))
+                    {
+                        using (var p = new Pen(Color.White))
+                        {
+                            //g.DrawRectangle(p, 0, 0, Width+9, Height-1);
+                            g.DrawLine(p,0, 0, 0, Height);
+                        }
+                    }
+                }
+            }
+        }
 
         // Variables
         static int pos = 0;
-        public  int index = 0;
+        int index = 0;
         int tabWidth = 200;
         List<Button> buttons = new List<Button>();
         List<Button> pages = new List<Button>();
@@ -52,9 +72,26 @@ namespace AirBrowser
             btnFlowAddNewTab.MouseLeave += BtnFlowAddNewTab_MouseLeave;
             btnBack.MouseEnter += BtnBack_MouseEnter;
             btnBack.MouseLeave += BtnBack_MouseLeave;
-           
+            btnNavigate.MouseEnter += BtnNavigate_MouseEnter;
+            btnNavigate.MouseLeave += BtnNavigate_MouseLeave;
+            
+            
+
         }
 
+        
+
+        private void BtnNavigate_MouseLeave(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            button.BackgroundImage = AirBrowser.Properties.Resources.blueButton;
+        }
+
+        private void BtnNavigate_MouseEnter(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            button.BackgroundImage = AirBrowser.Properties.Resources.blueButtonHighlight;
+        }
 
         private void BtnBack_MouseLeave(object sender, EventArgs e)
         {
@@ -113,6 +150,40 @@ namespace AirBrowser
 
         }
 
+        private void addNewTabToBar ()
+        {
+            Button newButton = new Button();
+            newButton.Name = index.ToString();
+            newButton.Text = (!isHomeTabOpened) ? "New Tab" : "Home Tab";
+            newButton.BackgroundImage = AirBrowser.Properties.Resources.selectedTab;
+            newButton.Size = new Size(tabWidth, 31);
+            newButton.TextAlign = ContentAlignment.MiddleLeft;
+            newButton.FlatStyle = FlatStyle.Flat;
+            newButton.FlatAppearance.BorderSize = 0;
+            newButton.Location = new Point(pos, -1);
+            newButton.Click += NewButton_Click;
+            newButton.MouseEnter += NewButton_MouseEnter;
+            newButton.MouseLeave += NewButton_MouseLeave;
+            newButton.MouseUp += NewButton_MouseUp;
+            newButton.MouseMove += NewButton_MouseMove;
+            newButton.MouseDown += NewButton_MouseDown;
+            buttons.Add(newButton);
+            pages.Add(newButton);
+            Controls.Add(newButton);
+            newButton.BringToFront();
+            indexOfSelectedButton = buttons.Count - 1;
+            pos = pos + tabWidth;
+            index++;
+            ChangeButtonStyleToBackground(buttons.IndexOf(newButton));
+            btnFlowAddNewTab.Location = new Point(pos, btnFlowAddNewTab.Location.Y);
+            
+            
+                webTab.DocumentCompleted += WebTab_DocumentCompleted;
+                webTab.DocumentTitleChanged += WebTab_DocumentTitleChanged;
+            
+            
+        }
+
         private void NewButton_MouseLeave(object sender, EventArgs e) {
 
             Button button = sender as Button;
@@ -136,7 +207,17 @@ namespace AirBrowser
             isMouseUp = true;
         }
 
-        
+        private void swap(List<Button> list, int indexA, int indexB) {
+
+            Button tmp = list[indexB];
+            list[indexB] = list[indexA];
+            list[indexA] = tmp;
+
+            for (int i = 0; i < list.Count; i++) {
+                if (i != indexA)
+                    list[i].Location = new Point(i * tabWidth, list[i].Location.Y);
+            }
+        }
 
         private void NewButton_MouseMove(object sender, MouseEventArgs e) {
             if (isMouseUp) {
@@ -173,7 +254,7 @@ namespace AirBrowser
             Button button = sender as Button;
             tabControl.SelectedIndex = pages.IndexOf(button);
             indexOfSelectedButton = buttons.IndexOf(button);
-            if (button.Tag.ToString() == "home") Form1_SizeChanged(sender, e);
+
             if (tabControl.SelectedTab.Controls[0] == webBrowser) ShowValidUrl();
             ChangeButtonStyleToBackground(buttons.IndexOf(button));
          
@@ -197,7 +278,12 @@ namespace AirBrowser
             }
         }
 
-       
+        private void ShowValidUrl()
+        {
+            string fullUrL = Convert.ToString(((WebBrowser)tabControl.SelectedTab.Controls[0]).Url);
+            string shortenUrl = fullUrL.Remove(0, 7);
+            txtNavigate.Text = shortenUrl;
+        }
 
         private void WebTab_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
@@ -208,6 +294,12 @@ namespace AirBrowser
             
         }
 
+       
+        private void Reposition ()
+        {
+            for (int i = 0; i < buttons.Count; i++)
+                buttons[i].Location = new Point(i * tabWidth, buttons[i].Location.Y);
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -246,7 +338,43 @@ namespace AirBrowser
             }
         }
 
-       
+        // Animation
+
+        private void tm_Tick(object sender, EventArgs e)
+        {
+            int speed = 10;
+            if (btnNavigate.Location.X > location+200) tm.Enabled = false;
+            else
+            {
+                btnNavigate.Location = new Point(btnNavigate.Location.X+speed, btnNavigate.Location.Y);
+                
+                button1.Location = new Point(button1.Location.X+speed, button1.Location.Y);
+                pictureBox1.Width += speed;
+                txtNavigate.Width += speed;
+            }
+            
+        }
+        
+        private void tmBack_Tick(object sender, EventArgs e)
+        {
+            int speed = 10;
+            
+            if (btnNavigate.Location.X < location) tmBack.Enabled = false;
+            else
+            {
+                btnNavigate.Location = new Point(btnNavigate.Location.X-speed, btnNavigate.Location.Y);
+                
+                button1.Location = new Point(button1.Location.X-speed, button1.Location.Y);
+                pictureBox1.Width -= speed;
+                txtNavigate.Width -= speed;
+            }
+
+        }
+
+        private void txtNavigate_Leave(object sender, EventArgs e)
+        {
+            tmBack.Enabled = true;
+        }
 
         private void txtNavigate_Click(object sender, EventArgs e)
         {
@@ -304,19 +432,13 @@ namespace AirBrowser
 
         private void btnHome_Click(object sender, EventArgs e)
         {
-            
             isHomeTabOpened = true;
             TabPage homeTab = new TabPage();
             tabControl.Controls.Add(homeTab);
             tabControl.SelectTab(tabControl.TabCount - 1);
-            webTab = new WebBrowser() { ScriptErrorsSuppressed = true };
-            webTab.Parent = homeTab;
-            webTab.Dock = DockStyle.Fill;
-            
             addNewTabToBar();
             
             HomeLayout(homeTab);
-            webTab.Visible = false;
             isHomeTabOpened = false;
 
         }
@@ -324,14 +446,38 @@ namespace AirBrowser
         int buttonSize = 150;
         
         //FlowLayoutPanel homePanel = new FlowLayoutPanel();
-        
+        private void HomeLayout (TabPage parentTab)
+        {
+            // Layout of the Home Tab
+
+            
+            homePanel.Parent = parentTab;
+            homePanel.Size = new Size(3*buttonSize+18, 3 * buttonSize + 18);
+            homePanel.Location = new Point(this.Size.Width/2-(3 * buttonSize + 18) /2, 80);
+            homePanel.Anchor = AnchorStyles.Top;
+            
+            for (int i = 0; i < 9; ++i)
+            {
+                Button button = new Button();
+                button.Size = new Size(buttonSize, buttonSize);
+                button.Tag = i;
+                homePanel.Controls.Add(button);
+            }
+            
+
+
+        }
+
+        private void txtNavigate_Leave_1(object sender, EventArgs e)
+        {
+            tmBack.Enabled = true;
+        }
 
         private void txtNavigate_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 WebBrowser web = tabControl.SelectedTab.Controls[0] as WebBrowser;
-                web.Visible = true;
                 if (web != null)
                 {
                     web.Navigate(txtNavigate.Text);
@@ -340,36 +486,6 @@ namespace AirBrowser
                 txtNavigate.AutoCompleteCustomSource.Add(txtNavigate.Text);
                 
             }
-        }
-
-        private void btnForward_MouseEnter(object sender, EventArgs e)
-        {
-            btnForward.BackgroundImage = AirBrowser.Properties.Resources.btnForwardHighLight;
-        }
-
-        private void btnForward_MouseLeave(object sender, EventArgs e)
-        {
-            btnForward.BackgroundImage = AirBrowser.Properties.Resources.btnForward;
-        }
-
-        private void btnHome_MouseEnter(object sender, EventArgs e)
-        {
-            btnHome.BackgroundImage = AirBrowser.Properties.Resources.btnHomeHighlight;
-        }
-
-        private void btnHome_MouseLeave(object sender, EventArgs e)
-        {
-            btnHome.BackgroundImage = AirBrowser.Properties.Resources.btnHome;
-        }
-
-        private void button1_MouseEnter(object sender, EventArgs e)
-        {
-            button1.BackgroundImage = AirBrowser.Properties.Resources.btnRemoveHighlight;
-        }
-
-        private void button1_MouseLeave(object sender, EventArgs e)
-        {
-            button1.BackgroundImage = AirBrowser.Properties.Resources.btnRemove;
         }
     }
 }

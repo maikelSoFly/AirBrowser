@@ -33,6 +33,7 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
+            this.btnForward = new System.Windows.Forms.Button();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.button1 = new System.Windows.Forms.Button();
             this.tm = new System.Windows.Forms.Timer(this.components);
@@ -41,16 +42,15 @@
             this.btn9gag = new System.Windows.Forms.Button();
             this.btnTwitch = new System.Windows.Forms.Button();
             this.btnYahoo = new System.Windows.Forms.Button();
-            this.txtHttps = new System.Windows.Forms.Label();
-            this.txtNavigate = new System.Windows.Forms.ComboBox();
-            this.homePanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnNavigate = new System.Windows.Forms.Button();
-            this.btnHome = new System.Windows.Forms.Button();
             this.btnFlowAddNewTab = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
-            this.btnForward = new System.Windows.Forms.Button();
+            this.btnNavigate = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.picGradient = new System.Windows.Forms.PictureBox();
+            this.txtHttps = new System.Windows.Forms.Label();
+            this.btnHome = new System.Windows.Forms.Button();
+            this.txtNavigate = new System.Windows.Forms.ComboBox();
+            this.homePanel = new System.Windows.Forms.FlowLayoutPanel();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
@@ -89,6 +89,22 @@
             this.webBrowser.Size = new System.Drawing.Size(1270, 619);
             this.webBrowser.TabIndex = 6;
             // 
+            // btnForward
+            // 
+            this.btnForward.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnForward.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnForward.FlatAppearance.BorderSize = 0;
+            this.btnForward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnForward.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnForward.ForeColor = System.Drawing.Color.Black;
+            this.btnForward.Location = new System.Drawing.Point(34, 30);
+            this.btnForward.Name = "btnForward";
+            this.btnForward.Size = new System.Drawing.Size(30, 32);
+            this.btnForward.TabIndex = 2;
+            this.btnForward.Text = ">";
+            this.btnForward.UseVisualStyleBackColor = false;
+            this.btnForward.Click += new System.EventHandler(this.btnForward_Click);
+            // 
             // fileSystemWatcher1
             // 
             this.fileSystemWatcher1.EnableRaisingEvents = true;
@@ -97,7 +113,6 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(12)))), ((int)(((byte)(12)))));
-            this.button1.BackgroundImage = global::AirBrowser.Properties.Resources.btnRemove;
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -107,10 +122,9 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(22, 22);
             this.button1.TabIndex = 9;
+            this.button1.Text = "x";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            this.button1.MouseEnter += new System.EventHandler(this.button1_MouseEnter);
-            this.button1.MouseLeave += new System.EventHandler(this.button1_MouseLeave);
             // 
             // tm
             // 
@@ -182,75 +196,6 @@
             this.btnYahoo.UseVisualStyleBackColor = false;
             this.btnYahoo.Click += new System.EventHandler(this.btnYahoo_Click);
             // 
-            // txtHttps
-            // 
-            this.txtHttps.AutoSize = true;
-            this.txtHttps.BackColor = System.Drawing.Color.White;
-            this.txtHttps.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtHttps.ForeColor = System.Drawing.Color.Green;
-            this.txtHttps.Location = new System.Drawing.Point(100, 38);
-            this.txtHttps.Name = "txtHttps";
-            this.txtHttps.Size = new System.Drawing.Size(38, 13);
-            this.txtHttps.TabIndex = 19;
-            this.txtHttps.Text = "label1";
-            // 
-            // txtNavigate
-            // 
-            this.txtNavigate.AutoCompleteCustomSource.AddRange(new string[] {
-            "9gag.com",
-            "facebook.com"});
-            this.txtNavigate.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.txtNavigate.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.txtNavigate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.txtNavigate.Location = new System.Drawing.Point(144, 36);
-            this.txtNavigate.Name = "txtNavigate";
-            this.txtNavigate.Size = new System.Drawing.Size(201, 21);
-            this.txtNavigate.TabIndex = 21;
-            this.txtNavigate.Click += new System.EventHandler(this.txtNavigate_Click);
-            this.txtNavigate.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNavigate_KeyDown);
-            this.txtNavigate.Leave += new System.EventHandler(this.txtNavigate_Leave);
-            this.txtNavigate.MouseEnter += new System.EventHandler(this.txtNavigate_MouseEnter);
-            this.txtNavigate.MouseLeave += new System.EventHandler(this.txtNavigate_MouseLeave);
-            // 
-            // homePanel
-            // 
-            this.homePanel.Location = new System.Drawing.Point(0, 0);
-            this.homePanel.Name = "homePanel";
-            this.homePanel.Size = new System.Drawing.Size(200, 100);
-            this.homePanel.TabIndex = 0;
-            // 
-            // btnNavigate
-            // 
-            this.btnNavigate.BackColor = System.Drawing.Color.Gainsboro;
-            this.btnNavigate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnNavigate.FlatAppearance.BorderSize = 0;
-            this.btnNavigate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNavigate.Font = new System.Drawing.Font("Segoe UI Black", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnNavigate.ForeColor = System.Drawing.Color.White;
-            this.btnNavigate.Location = new System.Drawing.Point(316, 30);
-            this.btnNavigate.Name = "btnNavigate";
-            this.btnNavigate.Size = new System.Drawing.Size(35, 32);
-            this.btnNavigate.TabIndex = 4;
-            this.btnNavigate.Text = "GO";
-            this.btnNavigate.UseVisualStyleBackColor = false;
-            this.btnNavigate.Click += new System.EventHandler(this.btnNavigate_Click);
-            // 
-            // btnHome
-            // 
-            this.btnHome.BackColor = System.Drawing.Color.White;
-            this.btnHome.BackgroundImage = global::AirBrowser.Properties.Resources.btnHome;
-            this.btnHome.FlatAppearance.BorderSize = 0;
-            this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHome.ForeColor = System.Drawing.Color.Black;
-            this.btnHome.Location = new System.Drawing.Point(64, 30);
-            this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(32, 32);
-            this.btnHome.TabIndex = 20;
-            this.btnHome.UseVisualStyleBackColor = false;
-            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
-            this.btnHome.MouseEnter += new System.EventHandler(this.btnHome_MouseEnter);
-            this.btnHome.MouseLeave += new System.EventHandler(this.btnHome_MouseLeave);
-            // 
             // btnFlowAddNewTab
             // 
             this.btnFlowAddNewTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(135)))), ((int)(((byte)(220)))));
@@ -268,7 +213,7 @@
             // btnBack
             // 
             this.btnBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(135)))), ((int)(((byte)(220)))));
-            this.btnBack.BackgroundImage = global::AirBrowser.Properties.Resources.blueButton;
+            this.btnBack.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBack.BackgroundImage")));
             this.btnBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnBack.FlatAppearance.BorderSize = 0;
             this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -278,33 +223,33 @@
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(34, 32);
             this.btnBack.TabIndex = 1;
+            this.btnBack.Text = "<";
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
-            // btnForward
+            // btnNavigate
             // 
-            this.btnForward.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnForward.BackgroundImage = global::AirBrowser.Properties.Resources.btnForward;
-            this.btnForward.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnForward.FlatAppearance.BorderSize = 0;
-            this.btnForward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnForward.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnForward.ForeColor = System.Drawing.Color.Black;
-            this.btnForward.Location = new System.Drawing.Point(34, 30);
-            this.btnForward.Name = "btnForward";
-            this.btnForward.Size = new System.Drawing.Size(30, 32);
-            this.btnForward.TabIndex = 2;
-            this.btnForward.UseVisualStyleBackColor = false;
-            this.btnForward.Click += new System.EventHandler(this.btnForward_Click);
-            this.btnForward.MouseEnter += new System.EventHandler(this.btnForward_MouseEnter);
-            this.btnForward.MouseLeave += new System.EventHandler(this.btnForward_MouseLeave);
+            this.btnNavigate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(135)))), ((int)(((byte)(220)))));
+            this.btnNavigate.BackgroundImage = global::AirBrowser.Properties.Resources.blueButton;
+            this.btnNavigate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnNavigate.FlatAppearance.BorderSize = 0;
+            this.btnNavigate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNavigate.Font = new System.Drawing.Font("Segoe UI Black", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnNavigate.ForeColor = System.Drawing.Color.White;
+            this.btnNavigate.Location = new System.Drawing.Point(316, 30);
+            this.btnNavigate.Name = "btnNavigate";
+            this.btnNavigate.Size = new System.Drawing.Size(35, 32);
+            this.btnNavigate.TabIndex = 4;
+            this.btnNavigate.Text = "GO";
+            this.btnNavigate.UseVisualStyleBackColor = false;
+            this.btnNavigate.Click += new System.EventHandler(this.btnNavigate_Click);
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.White;
-            this.pictureBox1.Location = new System.Drawing.Point(93, 30);
+            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
+            this.pictureBox1.Location = new System.Drawing.Point(59, 30);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(225, 32);
+            this.pictureBox1.Size = new System.Drawing.Size(259, 32);
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             // 
@@ -318,6 +263,56 @@
             this.picGradient.Size = new System.Drawing.Size(1285, 69);
             this.picGradient.TabIndex = 17;
             this.picGradient.TabStop = false;
+            // 
+            // txtHttps
+            // 
+            this.txtHttps.AutoSize = true;
+            this.txtHttps.BackColor = System.Drawing.Color.White;
+            this.txtHttps.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtHttps.ForeColor = System.Drawing.Color.Green;
+            this.txtHttps.Location = new System.Drawing.Point(100, 38);
+            this.txtHttps.Name = "txtHttps";
+            this.txtHttps.Size = new System.Drawing.Size(38, 13);
+            this.txtHttps.TabIndex = 19;
+            this.txtHttps.Text = "label1";
+            // 
+            // btnHome
+            // 
+            this.btnHome.BackColor = System.Drawing.Color.White;
+            this.btnHome.FlatAppearance.BorderSize = 0;
+            this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHome.ForeColor = System.Drawing.Color.Black;
+            this.btnHome.Location = new System.Drawing.Point(64, 30);
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Size = new System.Drawing.Size(32, 32);
+            this.btnHome.TabIndex = 20;
+            this.btnHome.Text = "H";
+            this.btnHome.UseVisualStyleBackColor = false;
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
+            // 
+            // txtNavigate
+            // 
+            this.txtNavigate.AutoCompleteCustomSource.AddRange(new string[] {
+            "9gag.com",
+            "facebook.com"});
+            this.txtNavigate.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtNavigate.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtNavigate.Location = new System.Drawing.Point(144, 36);
+            this.txtNavigate.Name = "txtNavigate";
+            this.txtNavigate.Size = new System.Drawing.Size(174, 21);
+            this.txtNavigate.TabIndex = 21;
+            this.txtNavigate.Click += new System.EventHandler(this.txtNavigate_Click);
+            this.txtNavigate.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNavigate_KeyDown);
+            this.txtNavigate.Leave += new System.EventHandler(this.txtNavigate_Leave);
+            this.txtNavigate.MouseEnter += new System.EventHandler(this.txtNavigate_MouseEnter);
+            this.txtNavigate.MouseLeave += new System.EventHandler(this.txtNavigate_MouseLeave);
+            // 
+            // homePanel
+            // 
+            this.homePanel.Location = new System.Drawing.Point(0, 0);
+            this.homePanel.Name = "homePanel";
+            this.homePanel.Size = new System.Drawing.Size(200, 100);
+            this.homePanel.TabIndex = 0;
             // 
             // Form1
             // 
@@ -367,6 +362,7 @@
         private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnForward;
+        private System.Windows.Forms.Button btnNavigate;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -382,7 +378,6 @@
         private System.Windows.Forms.Button btnHome;
         private System.Windows.Forms.ComboBox txtNavigate;
         private System.Windows.Forms.FlowLayoutPanel homePanel;
-        private System.Windows.Forms.Button btnNavigate;
     }
 }
 
