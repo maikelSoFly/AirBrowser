@@ -32,7 +32,7 @@ namespace AirBrowser
             location = btnNavigate.Location.X + 4;
             Controls.Add(panel.add_btnAddNewTab());
             BtnAddNewTab_Click(sender, e);
-            
+           
             tabControl.Controls.RemoveAt(0);                   
             txtHttps.Text = "https://";
             // Hide original tabs buttons
@@ -43,6 +43,7 @@ namespace AirBrowser
             panel.btnAddNewTab.Click += BtnAddNewTab_Click;
             btnBack.MouseEnter += BtnBack_MouseEnter;
             btnBack.MouseLeave += BtnBack_MouseLeave;
+            tabControl.SendToBack();
 
 
             panel.NewTab_Click_Done += new EventHandler(On_NewTab_Click_Done);
@@ -68,8 +69,9 @@ namespace AirBrowser
             webTab.Dock = DockStyle.Fill;
             webTab.Navigate("https://google.com");
             txtNavigate.Text = "www.google.com";
-
+            
             Controls.Add(panel.addNewTab());
+           
             webTab.DocumentCompleted += WebTab_DocumentCompleted;
             webTab.DocumentTitleChanged += WebTab_DocumentTitleChanged;
         }
@@ -127,11 +129,12 @@ namespace AirBrowser
            
             if (tabControl.TabPages.Count-1 > 0)
             {
-               panel.position = panel.position - panel.tabWidth;
+                panel.position = panel.position - panel.tabWidth;
                 int removeIndex = tabControl.SelectedIndex;
                
                 Controls.Remove(panel.pages[removeIndex]);
                 panel.tabs.RemoveAt(panel.indexOfSelectedButton);
+                panel.indexOfSelectedButton = panel.tabs.Count-1;
                 panel.pages.RemoveAt(removeIndex);
                 panel.Reposition();
                 
@@ -139,8 +142,7 @@ namespace AirBrowser
                 tabControl.SelectTab(tabControl.TabPages.Count-1);
                 panel.ChangeButtonStyleToBackground(panel.tabs.Count - 1);
                 panel.btnAddNewTab.Location =  new Point(panel.btnAddNewTab.Location.X - panel.tabWidth, panel.btnAddNewTab.Location.Y);
-            }
-            
+            } 
         }
 
 

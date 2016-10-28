@@ -68,7 +68,7 @@
             this.tabControl.Location = new System.Drawing.Point(-4, 63);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1285, 651);
+            this.tabControl.Size = new System.Drawing.Size(1285, 645);
             this.tabControl.TabIndex = 7;
             // 
             // tabPage1
@@ -76,17 +76,18 @@
             this.tabPage1.Controls.Add(this.webBrowser);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1277, 625);
+            this.tabPage1.Size = new System.Drawing.Size(1277, 619);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // webBrowser
             // 
-            this.webBrowser.Location = new System.Drawing.Point(0, 1);
+            this.webBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser.Location = new System.Drawing.Point(0, 0);
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser.Name = "webBrowser";
-            this.webBrowser.Size = new System.Drawing.Size(1270, 619);
+            this.webBrowser.Size = new System.Drawing.Size(1277, 619);
             this.webBrowser.TabIndex = 6;
             // 
             // fileSystemWatcher1
@@ -129,7 +130,7 @@
             this.btnFb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFb.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btnFb.ForeColor = System.Drawing.Color.Black;
-            this.btnFb.Location = new System.Drawing.Point(378, 38);
+            this.btnFb.Location = new System.Drawing.Point(378, 37);
             this.btnFb.Name = "btnFb";
             this.btnFb.Size = new System.Drawing.Size(73, 30);
             this.btnFb.TabIndex = 12;
@@ -144,7 +145,7 @@
             this.btn9gag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn9gag.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btn9gag.ForeColor = System.Drawing.Color.Black;
-            this.btn9gag.Location = new System.Drawing.Point(453, 38);
+            this.btn9gag.Location = new System.Drawing.Point(453, 37);
             this.btn9gag.Name = "btn9gag";
             this.btn9gag.Size = new System.Drawing.Size(73, 30);
             this.btn9gag.TabIndex = 13;
@@ -159,7 +160,7 @@
             this.btnTwitch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTwitch.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btnTwitch.ForeColor = System.Drawing.Color.Black;
-            this.btnTwitch.Location = new System.Drawing.Point(528, 38);
+            this.btnTwitch.Location = new System.Drawing.Point(528, 37);
             this.btnTwitch.Name = "btnTwitch";
             this.btnTwitch.Size = new System.Drawing.Size(73, 30);
             this.btnTwitch.TabIndex = 14;
@@ -174,7 +175,7 @@
             this.btnYahoo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnYahoo.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btnYahoo.ForeColor = System.Drawing.Color.Black;
-            this.btnYahoo.Location = new System.Drawing.Point(604, 38);
+            this.btnYahoo.Location = new System.Drawing.Point(604, 37);
             this.btnYahoo.Name = "btnYahoo";
             this.btnYahoo.Size = new System.Drawing.Size(73, 30);
             this.btnYahoo.TabIndex = 16;
@@ -299,12 +300,13 @@
             this.picGradient.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.picGradient.BackgroundImage = global::AirBrowser.Properties.Resources.bar1;
-            this.picGradient.Location = new System.Drawing.Point(-4, 0);
+            this.picGradient.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picGradient.Location = new System.Drawing.Point(0, 29);
             this.picGradient.Name = "picGradient";
-            this.picGradient.Size = new System.Drawing.Size(1285, 69);
+            this.picGradient.Size = new System.Drawing.Size(1277, 39);
+            this.picGradient.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picGradient.TabIndex = 17;
             this.picGradient.TabStop = false;
-            this.picGradient.Visible = false;
             // 
             // lblTest
             // 
@@ -319,8 +321,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1276, 703);
-            this.Controls.Add(this.lblTest);
             this.Controls.Add(this.btnNavigate);
             this.Controls.Add(this.txtNavigate);
             this.Controls.Add(this.btnHome);
@@ -333,8 +335,9 @@
             this.Controls.Add(this.btnFb);
             this.Controls.Add(this.btnTwitch);
             this.Controls.Add(this.btn9gag);
-            this.Controls.Add(this.tabControl);
+            this.Controls.Add(this.lblTest);
             this.Controls.Add(this.picGradient);
+            this.Controls.Add(this.tabControl);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.White;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

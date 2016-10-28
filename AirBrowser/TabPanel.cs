@@ -60,6 +60,7 @@ namespace AirBrowser
         {
 
             Button newTab = new Button();
+            
             newTab.Text = (!isHomeTabOpened) ? "New Tab" : "Home Tab";
             newTab.BackgroundImage = AirBrowser.Properties.Resources.selectedTab;
             newTab.Size = new Size(tabWidth, 31);
@@ -81,6 +82,7 @@ namespace AirBrowser
             index++;
             ChangeButtonStyleToBackground(tabs.IndexOf(newTab));
             btnAddNewTab.Location = new Point(position, 0);
+            
             return newTab;
         }
 
