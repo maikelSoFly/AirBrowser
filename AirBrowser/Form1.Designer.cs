@@ -46,11 +46,11 @@
             this.homePanel = new System.Windows.Forms.FlowLayoutPanel();
             this.btnNavigate = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
-            this.btnFlowAddNewTab = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnForward = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.picGradient = new System.Windows.Forms.PictureBox();
+            this.lblTest = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
@@ -251,20 +251,6 @@
             this.btnHome.MouseEnter += new System.EventHandler(this.btnHome_MouseEnter);
             this.btnHome.MouseLeave += new System.EventHandler(this.btnHome_MouseLeave);
             // 
-            // btnFlowAddNewTab
-            // 
-            this.btnFlowAddNewTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(135)))), ((int)(((byte)(220)))));
-            this.btnFlowAddNewTab.BackgroundImage = global::AirBrowser.Properties.Resources.addButton;
-            this.btnFlowAddNewTab.FlatAppearance.BorderSize = 0;
-            this.btnFlowAddNewTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFlowAddNewTab.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnFlowAddNewTab.Location = new System.Drawing.Point(-1, 0);
-            this.btnFlowAddNewTab.Name = "btnFlowAddNewTab";
-            this.btnFlowAddNewTab.Size = new System.Drawing.Size(32, 30);
-            this.btnFlowAddNewTab.TabIndex = 18;
-            this.btnFlowAddNewTab.UseVisualStyleBackColor = false;
-            this.btnFlowAddNewTab.Click += new System.EventHandler(this.btnFlowAddNewTab_Click);
-            // 
             // btnBack
             // 
             this.btnBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(135)))), ((int)(((byte)(220)))));
@@ -318,17 +304,27 @@
             this.picGradient.Size = new System.Drawing.Size(1285, 69);
             this.picGradient.TabIndex = 17;
             this.picGradient.TabStop = false;
+            this.picGradient.Visible = false;
+            // 
+            // lblTest
+            // 
+            this.lblTest.AutoSize = true;
+            this.lblTest.Location = new System.Drawing.Point(1020, 11);
+            this.lblTest.Name = "lblTest";
+            this.lblTest.Size = new System.Drawing.Size(35, 13);
+            this.lblTest.TabIndex = 22;
+            this.lblTest.Text = "label1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 703);
+            this.Controls.Add(this.lblTest);
             this.Controls.Add(this.btnNavigate);
             this.Controls.Add(this.txtNavigate);
             this.Controls.Add(this.btnHome);
             this.Controls.Add(this.txtHttps);
-            this.Controls.Add(this.btnFlowAddNewTab);
             this.Controls.Add(this.btnYahoo);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.button1);
@@ -337,8 +333,8 @@
             this.Controls.Add(this.btnFb);
             this.Controls.Add(this.btnTwitch);
             this.Controls.Add(this.btn9gag);
-            this.Controls.Add(this.picGradient);
             this.Controls.Add(this.tabControl);
+            this.Controls.Add(this.picGradient);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.White;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -377,12 +373,12 @@
         private System.Windows.Forms.Button btn9gag;
         private System.Windows.Forms.Button btnYahoo;
         private System.Windows.Forms.PictureBox picGradient;
-        private System.Windows.Forms.Button btnFlowAddNewTab;
         private System.Windows.Forms.Label txtHttps;
         private System.Windows.Forms.Button btnHome;
         private System.Windows.Forms.ComboBox txtNavigate;
         private System.Windows.Forms.FlowLayoutPanel homePanel;
         private System.Windows.Forms.Button btnNavigate;
+        private System.Windows.Forms.Label lblTest;
     }
 }
 

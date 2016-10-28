@@ -14,6 +14,21 @@ namespace AirBrowser
     {
         // Animation
 
+        private void txtNavigate_MouseEnter(object sender, EventArgs e)
+        {
+            tmBack.Enabled = false;
+            tm.Enabled = true;
+        }
+
+        private void txtNavigate_MouseLeave(object sender, EventArgs e)
+        {
+            if (txtNavigate.Focused == false)
+            {
+                tm.Enabled = false;
+                tmBack.Enabled = true;
+            }
+        }
+
         private void tm_Tick(object sender, EventArgs e)
         {
             int speed = 10;
