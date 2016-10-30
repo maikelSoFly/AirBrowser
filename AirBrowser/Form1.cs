@@ -70,7 +70,7 @@ namespace AirBrowser
             webTab.Navigate("https://google.com");
             txtNavigate.Text = "www.google.com";
             
-            Controls.Add(panel.addNewTab());
+            Controls.Add(panel.addNewTab("normal"));
            
             webTab.DocumentCompleted += WebTab_DocumentCompleted;
             webTab.DocumentTitleChanged += WebTab_DocumentTitleChanged;
@@ -192,6 +192,7 @@ namespace AirBrowser
 
         private void btnHome_Click(object sender, EventArgs e)
         {
+            
             isHomeTabOpened = true;
             TabPage homeTab = new TabPage();
             tabControl.Controls.Add(homeTab);
@@ -199,9 +200,9 @@ namespace AirBrowser
             webTab = new WebBrowser() { ScriptErrorsSuppressed = true };
             webTab.Parent = homeTab;
             webTab.Dock = DockStyle.Fill;
-         
+            
             webTab.Url = null;
-            Controls.Add(panel.addNewTab());
+            Controls.Add(panel.addNewTab("home"));
             
             HomeLayout(homeTab);
             webTab.Visible = false;

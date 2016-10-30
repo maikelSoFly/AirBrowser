@@ -20,6 +20,7 @@ namespace AirBrowser
         bool isMouseUp;
         bool isHomeTabOpened = false;
         int newLocation_X;
+        public string tag = "";
         public List<Button> tabs = new List<Button>();
         public List<Button> pages = new List<Button>();
         public Button btnAddNewTab = new Button();
@@ -56,11 +57,11 @@ namespace AirBrowser
         }
 
 
-        public Button addNewTab()
+        public Button addNewTab(string _tag)
         {
 
             Button newTab = new Button();
-            
+            newTab.Tag = _tag;
             newTab.Text = (!isHomeTabOpened) ? "New Tab" : "Home Tab";
             newTab.BackgroundImage = AirBrowser.Properties.Resources.selectedTab;
             newTab.Size = new Size(tabWidth, 31);
