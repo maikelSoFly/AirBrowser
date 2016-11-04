@@ -24,8 +24,6 @@ namespace AirBrowser
             button.BackgroundImage = AirBrowser.Properties.Resources.blueButtonHighlight;
         }
 
-       
-
         private void btnForward_MouseEnter(object sender, EventArgs e)
         {
             btnForward.BackgroundImage = AirBrowser.Properties.Resources.btnForwardHighLight;
@@ -45,7 +43,5 @@ namespace AirBrowser
         {
             btnHome.BackgroundImage = AirBrowser.Properties.Resources.btnHome;
         }
-
-        
     }
 }

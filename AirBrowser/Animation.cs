@@ -36,12 +36,9 @@ namespace AirBrowser
             else
             {
                 btnNavigate.Location = new Point(btnNavigate.Location.X + speed, btnNavigate.Location.Y);
-
-               
                 pictureBox1.Width += speed;
                 txtNavigate.Width += speed;
             }
-
         }
 
         private void tmBack_Tick(object sender, EventArgs e)
@@ -52,12 +49,9 @@ namespace AirBrowser
             else
             {
                 btnNavigate.Location = new Point(btnNavigate.Location.X - speed, btnNavigate.Location.Y);
-
-                
                 pictureBox1.Width -= speed;
                 txtNavigate.Width -= speed;
             }
-
         }
 
         private void txtNavigate_Leave(object sender, EventArgs e)

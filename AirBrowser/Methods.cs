@@ -23,8 +23,6 @@ namespace AirBrowser
         private void HomeLayout(TabPage parentTab)
         {
             // Layout of the Home Tab
-
-
             homePanel.Parent = parentTab;
             homePanel.Size = new Size(3 * buttonSize + 18, 3 * buttonSize + 18);
             homePanel.Location = new Point(this.Size.Width / 2 - (3 * buttonSize + 18) / 2, 80);
@@ -38,9 +36,6 @@ namespace AirBrowser
                 homePanel.Controls.Add(button);
 
             }
-
-
-
         }
     }
 }
