@@ -12,11 +12,11 @@ namespace AirBrowser
 {
     partial class TabPanel 
     {
-        public int position = 0;
+        private int position = 0;
         
         private int index = 0;
         public int tabWidth = 200;
-        public int rmPosition = 0;
+        private int rmPosition = 0;
         public  int indexOfSelectedButton = 0;
         public int indexOfSelectedPage = 0;
         private bool isMouseUp;
@@ -24,14 +24,11 @@ namespace AirBrowser
         private int newLocation_X;
         
         public List<Button> tabs = new List<Button>();
-        public Dictionary<Button, int> tab = new Dictionary<Button, int>();
         public List<Button> pages = new List<Button>();
         public List<Button> rmPages = new List<Button>();
         public Button btnAddNewTab = new Button();
         
         public List<Button> removeButtons = new List<Button>();
-
-        Timer tmSlide = new Timer();
 
         public event EventHandler NewTab_Click_Done = delegate { };
         public event EventHandler NewTab_MouseUp_Done = delegate { };
@@ -48,13 +45,9 @@ namespace AirBrowser
             btnAddNewTab.Location = new Point(0, -1);
             btnAddNewTab.MouseEnter += BtnAddNewTab_MouseEnter;
             btnAddNewTab.MouseLeave += BtnAddNewTab_MouseLeave;
-            tmSlide.Tick += TmSlide_Tick;
 
             rmPosition = tabWidth - 19;
 
-        tmSlide.Interval = 1;
-            
-            
         }
 
         private void SelectTab (object sender)
@@ -96,7 +89,7 @@ namespace AirBrowser
             rmNewTab.MouseEnter += RmNewTab_MouseEnter;
             rmNewTab.MouseLeave += RmNewTab_MouseLeave;
             rmPages.Add(rmNewTab);
-            //rmNewTab.Text = removeButtons.IndexOf(rmNewTab).ToString();
+            
 
             rmPosition += tabWidth;
 
@@ -203,20 +196,17 @@ namespace AirBrowser
             removeButtons[indexA] = tmp2;
 
 
-            if (indexA > indexB)
-            {
-                list[indexA].Location = new Point(list[indexA].Location.X + tabWidth, list[indexA].Location.Y);
-                removeButtons[indexA].Location = new Point(list[indexA].Location.X + (tabWidth-19), list[indexA].Location.Y + 8);
+                if (indexA > indexB)
+                {
+                    list[indexA].Location = new Point(list[indexA].Location.X + tabWidth, list[indexA].Location.Y);
+                    removeButtons[indexA].Location = new Point(list[indexA].Location.X + (tabWidth-19), list[indexA].Location.Y + 8);
 
-            }
-            else
-            {
-                list[indexA].Location = new Point(list[indexA].Location.X - tabWidth, list[indexA].Location.Y);
-                removeButtons[indexA].Location = new Point(list[indexA].Location.X + (tabWidth-19), list[indexA].Location.Y + 8);
-            }
-
-                //tmSlide.Enabled = false;
-
+                }
+                else
+                {
+                    list[indexA].Location = new Point(list[indexA].Location.X - tabWidth, list[indexA].Location.Y);
+                    removeButtons[indexA].Location = new Point(list[indexA].Location.X + (tabWidth-19), list[indexA].Location.Y + 8);
+                }
 
             }
 
@@ -238,49 +228,56 @@ namespace AirBrowser
                 }
             }
         }
-
+        int mousePosition = 0;
         private void NewTab_MouseDown(object sender, MouseEventArgs e)
         {
+            mousePosition = e.Location.X;
+            Button button = sender as Button;
             SelectTab(sender);
+            btnAddNewTab.Visible = false;
+           
+            button.BringToFront();
+            removeButtons[tabs.IndexOf(button)].BringToFront();
             isMouseUp = true;
         }
 
         private void NewTab_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isMouseUp)
-            {
-                btnAddNewTab.Visible = false;
-                Button button = sender as Button;
-                newLocation_X = (tabWidth * (tabs.IndexOf(button) + 1));
-                button.BringToFront();
-                
-                removeButtons[tabs.IndexOf(button)].Location = new Point(button.Location.X+(tabWidth-19), button.Location.Y+8);
-                button.Location = new Point(button.Location.X + e.Location.X - (tabWidth / 2), button.Location.Y);
+            
+          
+              if (isMouseUp)
+              {
+                  
+                 Button button = sender as Button;
+                  
+                 button.Location = new Point(button.Location.X + e.Location.X - mousePosition, button.Location.Y);
+                 removeButtons[tabs.IndexOf(button)].Location = new Point(button.Location.X + (tabWidth - 19), button.Location.Y + 8);
 
-                
+                if (tabs.IndexOf(button) != 0)
+                  {
 
-                if (tabs.IndexOf(button) != 0 ) {
-                   
-                    if (button.Location.X < ((Button)tabs[tabs.IndexOf(button) - 1]).Location.X + (tabWidth / 2))
-                    {
-                        swap(tabs, tabs.IndexOf(button), tabs.IndexOf(button) - 1);
-                    }
-                    
-                }
+                      if (button.Location.X < ((Button)tabs[tabs.IndexOf(button) - 1]).Location.X + (tabWidth / 2))
+                      {
+                          swap(tabs, tabs.IndexOf(button), tabs.IndexOf(button) - 1);
+                      }
 
-                if (tabs.IndexOf(button) != tabs.Count-1)
-                {
-                    if ((button.Location.X > ((Button)tabs[tabs.IndexOf(button) + 1]).Location.X))
-                    {
-                        swap(tabs, tabs.IndexOf(button),  tabs.IndexOf(button) + 1);
-                    }
-                }
+                  }
 
-            }
+                  if (tabs.IndexOf(button) != tabs.Count - 1)
+                  {
+                      if ((button.Location.X > ((Button)tabs[tabs.IndexOf(button) + 1]).Location.X))
+                      {
+                          swap(tabs, tabs.IndexOf(button), tabs.IndexOf(button) + 1);
+                      }
+                  }
+
+              }
+         
         }
 
         private void NewTab_MouseUp(object sender, MouseEventArgs e)
         {
+            mousePosition = 0;
             btnAddNewTab.Visible = true;
             isMouseUp = false;
             Button button = sender as Button;
@@ -289,7 +286,7 @@ namespace AirBrowser
 
             newLocation_X = tabWidth * tabs.IndexOf(button);
             button.Location = new Point(newLocation_X, button.Location.Y);
-
+           
             removeButtons[tabs.IndexOf(button)].Location = new Point(button.Location.X + (tabWidth - 19), button.Location.Y + 8);
             for (int i = 0; i < removeButtons.Count; i++) removeButtons[i].BringToFront();
 

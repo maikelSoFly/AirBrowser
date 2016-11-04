@@ -44,7 +44,6 @@
             this.txtNavigate = new System.Windows.Forms.ComboBox();
             this.homePanel = new System.Windows.Forms.FlowLayoutPanel();
             this.btnNavigate = new System.Windows.Forms.Button();
-            this.lblTest = new System.Windows.Forms.Label();
             this.btnHome = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnForward = new System.Windows.Forms.Button();
@@ -217,16 +216,6 @@
             this.btnNavigate.UseVisualStyleBackColor = false;
             this.btnNavigate.Click += new System.EventHandler(this.btnNavigate_Click);
             // 
-            // lblTest
-            // 
-            this.lblTest.AutoSize = true;
-            this.lblTest.ForeColor = System.Drawing.Color.Black;
-            this.lblTest.Location = new System.Drawing.Point(1020, 11);
-            this.lblTest.Name = "lblTest";
-            this.lblTest.Size = new System.Drawing.Size(35, 13);
-            this.lblTest.TabIndex = 22;
-            this.lblTest.Text = "label1";
-            // 
             // btnHome
             // 
             this.btnHome.BackColor = System.Drawing.Color.White;
@@ -292,7 +281,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.picGradient.BackgroundImage = global::AirBrowser.Properties.Resources.bar1;
             this.picGradient.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.picGradient.Location = new System.Drawing.Point(0, 29);
+            this.picGradient.Location = new System.Drawing.Point(0, 30);
             this.picGradient.Name = "picGradient";
             this.picGradient.Size = new System.Drawing.Size(1277, 39);
             this.picGradient.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -316,7 +305,6 @@
             this.Controls.Add(this.btnFb);
             this.Controls.Add(this.btnTwitch);
             this.Controls.Add(this.btn9gag);
-            this.Controls.Add(this.lblTest);
             this.Controls.Add(this.picGradient);
             this.Controls.Add(this.tabControl);
             this.DoubleBuffered = true;
@@ -361,7 +349,6 @@
         private System.Windows.Forms.ComboBox txtNavigate;
         private System.Windows.Forms.FlowLayoutPanel homePanel;
         private System.Windows.Forms.Button btnNavigate;
-        private System.Windows.Forms.Label lblTest;
     }
 }
 

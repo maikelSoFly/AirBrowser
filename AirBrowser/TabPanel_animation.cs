@@ -23,22 +23,7 @@ namespace AirBrowser
         int ind = 0;
         int a = 0;
         
-        private void TmSlide_Tick(object sender, EventArgs e)
-        {
-
-
-            if (a <= tabWidth)
-            {
-                tabs[ind].Location = new Point(tabs[ind].Location.X + 10, tabs[ind].Location.Y);
-                a++;
-            }
-            else tmSlide.Enabled = false;
-           
-
-
-            
-        }
-
+        
        
     }
 }

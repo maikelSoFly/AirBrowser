@@ -24,7 +24,7 @@ namespace AirBrowser
         WebBrowser webTab = null;
         int location;
         int buttonSize = 150;
-        bool isHomeTabOpened = false;
+        
         TabPanel panel = new TabPanel();
         
 
@@ -48,10 +48,10 @@ namespace AirBrowser
             panel.NewTab_Click_Done += new EventHandler(On_NewTab_Click_Done);
             panel.NewTab_MouseUp_Done += new EventHandler(On_NewTab_MouseUp_Done);
             panel.RmNewTab_Click_Done += new EventHandler(On_RmNewTab_Click_Done);
+            webBrowser.WebBrowserShortcutsEnabled = true;
 
-            
-           
-           
+
+
         }
 
         void On_RmNewTab_Click_Done(object sender, EventArgs e)
@@ -59,7 +59,6 @@ namespace AirBrowser
 
             if (tabControl.TabPages.Count - 1 > 0)
             {
-
                 int removeFromStaticList = panel.removeFromStaticList;
                 int removeFromNonStaticList = panel.removeFromNonStaticList;
 
@@ -72,27 +71,19 @@ namespace AirBrowser
                 panel.pages.RemoveAt(removeFromStaticList);
                 panel.removeButtons.RemoveAt(removeFromNonStaticList);
 
-                lblTest.Text = Convert.ToString(removeFromStaticList);
+                
 
-                if (removeFromNonStaticList != panel.indexOfSelectedButton)
+                if (removeFromNonStaticList < panel.indexOfSelectedButton)
                 {
                     panel.indexOfSelectedButton -= 1;
-                    //tabControl.SelectTab(tabControl.SelectedIndex-1);
                 }
                 else
                 {
                     panel.indexOfSelectedButton = panel.tabs.Count - 1;
-                    //tabControl.SelectTab(tabControl.TabPages.Count - 1);
                 }
 
-
-                    panel.ChangeButtonStyleToBackground(panel.indexOfSelectedButton);
-
-                
-                
+                panel.ChangeButtonStyleToBackground(panel.indexOfSelectedButton);
                 panel.Reposition();
-
-                
 
                 panel.btnAddNewTab.Location = new Point(panel.btnAddNewTab.Location.X - panel.tabWidth, panel.btnAddNewTab.Location.Y);
             }
@@ -101,20 +92,21 @@ namespace AirBrowser
 
         void On_NewTab_MouseUp_Done(object sender, EventArgs e) 
         {
-
+           
             tabControl.SelectedIndex = panel.indexOfSelectedPage;
-            //if (button.Tag.ToString() == "home") Form1_SizeChanged(sender, e);
-            if (tabControl.SelectedTab.Controls[0].GetType() == webTab.GetType()) ShowValidUrl();
+            Form1_SizeChanged(sender, e);
+             ShowValidUrl();
+            
 
         }
 
-        void On_NewTab_Click_Done(object sender, EventArgs e) // To samo zrobic z MouseUp i MouseDown!!!
+        void On_NewTab_Click_Done(object sender, EventArgs e) 
         {
-            
+            Button button = sender as Button;
             tabControl.SelectedIndex = panel.indexOfSelectedPage;
-            //if (button.Tag.ToString() == "home") Form1_SizeChanged(sender, e);
-            if (tabControl.SelectedTab.Controls[0].GetType() == webTab.GetType() ) ShowValidUrl();
-            
+            Form1_SizeChanged(sender, e);
+            ShowValidUrl();
+           
         }
 
         private void BtnAddNewTab_Click(object sender, EventArgs e)
@@ -131,7 +123,7 @@ namespace AirBrowser
 
             Controls.Add(panel.addNewRmTab());
             Controls.Add(panel.addNewTab("normal"));
-            lblTest.Text = Convert.ToString(tabControl.SelectedIndex);
+            
             webTab.DocumentCompleted += WebTab_DocumentCompleted;
             webTab.DocumentTitleChanged += WebTab_DocumentTitleChanged;
         }
@@ -184,9 +176,6 @@ namespace AirBrowser
         }
 
 
-        
-
-
         private void txtNavigate_Click(object sender, EventArgs e)
         {
             txtNavigate.SelectionStart = 0;
@@ -234,7 +223,7 @@ namespace AirBrowser
         private void btnHome_Click(object sender, EventArgs e)
         {
             
-            isHomeTabOpened = true;
+            
             TabPage homeTab = new TabPage();
             tabControl.Controls.Add(homeTab);
             tabControl.SelectTab(tabControl.TabCount - 1);
@@ -249,7 +238,7 @@ namespace AirBrowser
             
             HomeLayout(homeTab);
             webTab.Visible = false;
-            isHomeTabOpened = false;
+            
             ShowValidUrl();
         }
 
