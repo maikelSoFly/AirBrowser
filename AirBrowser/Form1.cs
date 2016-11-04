@@ -29,11 +29,12 @@ namespace AirBrowser
         
 
         private void Form1_Load(object sender, EventArgs e) {
+            tabControl.Controls.RemoveAt(0);
             location = btnNavigate.Location.X + 4;
             Controls.Add(panel.add_btnAddNewTab());
             BtnAddNewTab_Click(sender, e);
            
-            tabControl.Controls.RemoveAt(0);                   
+                              
             txtHttps.Text = "https://";
             // Hide original tabs buttons
             tabControl.Appearance = TabAppearance.FlatButtons;
@@ -44,15 +45,72 @@ namespace AirBrowser
             btnBack.MouseEnter += BtnBack_MouseEnter;
             btnBack.MouseLeave += BtnBack_MouseLeave;
             tabControl.SendToBack();
-
-
             panel.NewTab_Click_Done += new EventHandler(On_NewTab_Click_Done);
+            panel.NewTab_MouseUp_Done += new EventHandler(On_NewTab_MouseUp_Done);
+            panel.RmNewTab_Click_Done += new EventHandler(On_RmNewTab_Click_Done);
+
+            
+           
            
         }
 
-        void On_NewTab_Click_Done(object sender, EventArgs e)
+        void On_RmNewTab_Click_Done(object sender, EventArgs e)
         {
-          
+
+            if (tabControl.TabPages.Count - 1 > 0)
+            {
+
+                int removeFromStaticList = panel.removeFromStaticList;
+                int removeFromNonStaticList = panel.removeFromNonStaticList;
+
+                Controls.Remove(panel.removeButtons[removeFromNonStaticList]);
+                Controls.Remove(panel.tabs[removeFromNonStaticList]);
+                tabControl.TabPages.RemoveAt(removeFromStaticList);
+
+                panel.tabs.RemoveAt(removeFromNonStaticList);
+                panel.rmPages.RemoveAt(removeFromStaticList);
+                panel.pages.RemoveAt(removeFromStaticList);
+                panel.removeButtons.RemoveAt(removeFromNonStaticList);
+
+                lblTest.Text = Convert.ToString(removeFromStaticList);
+
+                if (removeFromNonStaticList != panel.indexOfSelectedButton)
+                {
+                    panel.indexOfSelectedButton -= 1;
+                    //tabControl.SelectTab(tabControl.SelectedIndex-1);
+                }
+                else
+                {
+                    panel.indexOfSelectedButton = panel.tabs.Count - 1;
+                    //tabControl.SelectTab(tabControl.TabPages.Count - 1);
+                }
+
+
+                    panel.ChangeButtonStyleToBackground(panel.indexOfSelectedButton);
+
+                
+                
+                panel.Reposition();
+
+                
+
+                panel.btnAddNewTab.Location = new Point(panel.btnAddNewTab.Location.X - panel.tabWidth, panel.btnAddNewTab.Location.Y);
+            }
+
+        }
+
+        void On_NewTab_MouseUp_Done(object sender, EventArgs e) 
+        {
+
+            tabControl.SelectedIndex = panel.indexOfSelectedPage;
+            //if (button.Tag.ToString() == "home") Form1_SizeChanged(sender, e);
+            if (tabControl.SelectedTab.Controls[0].GetType() == webTab.GetType()) ShowValidUrl();
+
+        }
+
+        void On_NewTab_Click_Done(object sender, EventArgs e) // To samo zrobic z MouseUp i MouseDown!!!
+        {
+            
             tabControl.SelectedIndex = panel.indexOfSelectedPage;
             //if (button.Tag.ToString() == "home") Form1_SizeChanged(sender, e);
             if (tabControl.SelectedTab.Controls[0].GetType() == webTab.GetType() ) ShowValidUrl();
@@ -61,17 +119,19 @@ namespace AirBrowser
 
         private void BtnAddNewTab_Click(object sender, EventArgs e)
         {
+            
             TabPage tab = new TabPage();
             tabControl.Controls.Add(tab);
-            tabControl.SelectTab(tabControl.TabCount - 1);
+            tabControl.SelectTab(tabControl.TabCount -1);
             webTab = new WebBrowser() { ScriptErrorsSuppressed = true };
             webTab.Parent = tab;
             webTab.Dock = DockStyle.Fill;
             webTab.Navigate("https://google.com");
             txtNavigate.Text = "www.google.com";
-            
+
+            Controls.Add(panel.addNewRmTab());
             Controls.Add(panel.addNewTab("normal"));
-           
+            lblTest.Text = Convert.ToString(tabControl.SelectedIndex);
             webTab.DocumentCompleted += WebTab_DocumentCompleted;
             webTab.DocumentTitleChanged += WebTab_DocumentTitleChanged;
         }
@@ -124,26 +184,7 @@ namespace AirBrowser
         }
 
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-           
-            if (tabControl.TabPages.Count-1 > 0)
-            {
-                panel.position = panel.position - panel.tabWidth;
-                int removeIndex = tabControl.SelectedIndex;
-               
-                Controls.Remove(panel.pages[removeIndex]);
-                panel.tabs.RemoveAt(panel.indexOfSelectedButton);
-                panel.indexOfSelectedButton = panel.tabs.Count-1;
-                panel.pages.RemoveAt(removeIndex);
-                panel.Reposition();
-                
-                tabControl.TabPages.RemoveAt(removeIndex);
-                tabControl.SelectTab(tabControl.TabPages.Count-1);
-                panel.ChangeButtonStyleToBackground(panel.tabs.Count - 1);
-                panel.btnAddNewTab.Location =  new Point(panel.btnAddNewTab.Location.X - panel.tabWidth, panel.btnAddNewTab.Location.Y);
-            } 
-        }
+        
 
 
         private void txtNavigate_Click(object sender, EventArgs e)
@@ -202,7 +243,9 @@ namespace AirBrowser
             webTab.Dock = DockStyle.Fill;
             
             webTab.Url = null;
+            Controls.Add(panel.addNewRmTab());
             Controls.Add(panel.addNewTab("home"));
+            
             
             HomeLayout(homeTab);
             webTab.Visible = false;
@@ -224,7 +267,8 @@ namespace AirBrowser
                 txtNavigate.Items.Add(txtNavigate.Text);
                 txtNavigate.AutoCompleteCustomSource.Add(txtNavigate.Text);
             }
-        } 
+        }
+        
     }
 }
 

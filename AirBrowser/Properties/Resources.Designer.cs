@@ -193,6 +193,56 @@ namespace AirBrowser.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap btnRemovepanelBackground {
+            get {
+                object obj = ResourceManager.GetObject("btnRemovepanelBackground", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap btnRemovepanelHighlight {
+            get {
+                object obj = ResourceManager.GetObject("btnRemovepanelHighlight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap btnRemovepanelHighlightBackground {
+            get {
+                object obj = ResourceManager.GetObject("btnRemovepanelHighlightBackground", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap btnRemovepanelHighlightBackground1 {
+            get {
+                object obj = ResourceManager.GetObject("btnRemovepanelHighlightBackground1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PanelBtnRemove {
+            get {
+                object obj = ResourceManager.GetObject("PanelBtnRemove", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap selectedTab {
             get {
                 object obj = ResourceManager.GetObject("selectedTab", resourceCulture);

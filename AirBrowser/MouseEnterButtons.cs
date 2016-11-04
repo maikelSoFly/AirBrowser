@@ -46,14 +46,6 @@ namespace AirBrowser
             btnHome.BackgroundImage = AirBrowser.Properties.Resources.btnHome;
         }
 
-        private void button1_MouseEnter(object sender, EventArgs e)
-        {
-            button1.BackgroundImage = AirBrowser.Properties.Resources.btnRemoveHighlight;
-        }
-
-        private void button1_MouseLeave(object sender, EventArgs e)
-        {
-            button1.BackgroundImage = AirBrowser.Properties.Resources.btnRemove;
-        }
+        
     }
 }

@@ -37,7 +37,7 @@ namespace AirBrowser
             {
                 btnNavigate.Location = new Point(btnNavigate.Location.X + speed, btnNavigate.Location.Y);
 
-                button1.Location = new Point(button1.Location.X + speed, button1.Location.Y);
+               
                 pictureBox1.Width += speed;
                 txtNavigate.Width += speed;
             }
@@ -53,7 +53,7 @@ namespace AirBrowser
             {
                 btnNavigate.Location = new Point(btnNavigate.Location.X - speed, btnNavigate.Location.Y);
 
-                button1.Location = new Point(button1.Location.X - speed, button1.Location.Y);
+                
                 pictureBox1.Width -= speed;
                 txtNavigate.Width -= speed;
             }

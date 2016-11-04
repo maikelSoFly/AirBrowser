@@ -110,6 +110,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TabPanel.cs" />
+    <Compile Include="TabPanel_animation.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -144,6 +145,10 @@
     <None Include="Graphics\btnHomeHighlight.png" />
     <None Include="Graphics\btnRemove.png" />
     <None Include="Graphics\btnRemoveHighlight.png" />
+    <None Include="Graphics\PanelBtnRemove.png" />
+    <None Include="Graphics\btnRemovepanelBackground.png" />
+    <None Include="Graphics\btnRemovepanelHighlight.png" />
+    <None Include="Graphics\btnRemovepanelHighlightBackground.png" />
     <Content Include="ICON.ico" />
     <None Include="Graphics\blueButtonHighlight.png" />
     <None Include="Graphics\blueButton.png" />

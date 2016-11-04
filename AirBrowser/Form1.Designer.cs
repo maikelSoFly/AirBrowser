@@ -34,7 +34,6 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
-            this.button1 = new System.Windows.Forms.Button();
             this.tm = new System.Windows.Forms.Timer(this.components);
             this.tmBack = new System.Windows.Forms.Timer(this.components);
             this.btnFb = new System.Windows.Forms.Button();
@@ -45,12 +44,12 @@
             this.txtNavigate = new System.Windows.Forms.ComboBox();
             this.homePanel = new System.Windows.Forms.FlowLayoutPanel();
             this.btnNavigate = new System.Windows.Forms.Button();
+            this.lblTest = new System.Windows.Forms.Label();
             this.btnHome = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnForward = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.picGradient = new System.Windows.Forms.PictureBox();
-            this.lblTest = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
@@ -94,24 +93,6 @@
             // 
             this.fileSystemWatcher1.EnableRaisingEvents = true;
             this.fileSystemWatcher1.SynchronizingObject = this;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(12)))), ((int)(((byte)(12)))));
-            this.button1.BackgroundImage = global::AirBrowser.Properties.Resources.btnRemove;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI Black", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button1.Location = new System.Drawing.Point(351, 35);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(22, 22);
-            this.button1.TabIndex = 9;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            this.button1.MouseEnter += new System.EventHandler(this.button1_MouseEnter);
-            this.button1.MouseLeave += new System.EventHandler(this.button1_MouseLeave);
             // 
             // tm
             // 
@@ -189,7 +170,7 @@
             this.txtHttps.BackColor = System.Drawing.Color.White;
             this.txtHttps.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txtHttps.ForeColor = System.Drawing.Color.Green;
-            this.txtHttps.Location = new System.Drawing.Point(100, 38);
+            this.txtHttps.Location = new System.Drawing.Point(100, 42);
             this.txtHttps.Name = "txtHttps";
             this.txtHttps.Size = new System.Drawing.Size(38, 13);
             this.txtHttps.TabIndex = 19;
@@ -203,7 +184,7 @@
             this.txtNavigate.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txtNavigate.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txtNavigate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.txtNavigate.Location = new System.Drawing.Point(144, 36);
+            this.txtNavigate.Location = new System.Drawing.Point(144, 40);
             this.txtNavigate.Name = "txtNavigate";
             this.txtNavigate.Size = new System.Drawing.Size(201, 21);
             this.txtNavigate.TabIndex = 21;
@@ -228,13 +209,23 @@
             this.btnNavigate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNavigate.Font = new System.Drawing.Font("Segoe UI Black", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btnNavigate.ForeColor = System.Drawing.Color.White;
-            this.btnNavigate.Location = new System.Drawing.Point(316, 30);
+            this.btnNavigate.Location = new System.Drawing.Point(316, 34);
             this.btnNavigate.Name = "btnNavigate";
             this.btnNavigate.Size = new System.Drawing.Size(35, 32);
             this.btnNavigate.TabIndex = 4;
             this.btnNavigate.Text = "GO";
             this.btnNavigate.UseVisualStyleBackColor = false;
             this.btnNavigate.Click += new System.EventHandler(this.btnNavigate_Click);
+            // 
+            // lblTest
+            // 
+            this.lblTest.AutoSize = true;
+            this.lblTest.ForeColor = System.Drawing.Color.Black;
+            this.lblTest.Location = new System.Drawing.Point(1020, 11);
+            this.lblTest.Name = "lblTest";
+            this.lblTest.Size = new System.Drawing.Size(35, 13);
+            this.lblTest.TabIndex = 22;
+            this.lblTest.Text = "label1";
             // 
             // btnHome
             // 
@@ -243,7 +234,7 @@
             this.btnHome.FlatAppearance.BorderSize = 0;
             this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHome.ForeColor = System.Drawing.Color.Black;
-            this.btnHome.Location = new System.Drawing.Point(64, 30);
+            this.btnHome.Location = new System.Drawing.Point(64, 34);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(32, 32);
             this.btnHome.TabIndex = 20;
@@ -261,7 +252,7 @@
             this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBack.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btnBack.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnBack.Location = new System.Drawing.Point(0, 30);
+            this.btnBack.Location = new System.Drawing.Point(0, 34);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(34, 32);
             this.btnBack.TabIndex = 1;
@@ -277,7 +268,7 @@
             this.btnForward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnForward.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btnForward.ForeColor = System.Drawing.Color.Black;
-            this.btnForward.Location = new System.Drawing.Point(34, 30);
+            this.btnForward.Location = new System.Drawing.Point(34, 34);
             this.btnForward.Name = "btnForward";
             this.btnForward.Size = new System.Drawing.Size(30, 32);
             this.btnForward.TabIndex = 2;
@@ -289,7 +280,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.White;
-            this.pictureBox1.Location = new System.Drawing.Point(93, 30);
+            this.pictureBox1.Location = new System.Drawing.Point(93, 34);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(225, 32);
             this.pictureBox1.TabIndex = 10;
@@ -308,15 +299,6 @@
             this.picGradient.TabIndex = 17;
             this.picGradient.TabStop = false;
             // 
-            // lblTest
-            // 
-            this.lblTest.AutoSize = true;
-            this.lblTest.Location = new System.Drawing.Point(1020, 11);
-            this.lblTest.Name = "lblTest";
-            this.lblTest.Size = new System.Drawing.Size(35, 13);
-            this.lblTest.TabIndex = 22;
-            this.lblTest.Text = "label1";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -329,7 +311,6 @@
             this.Controls.Add(this.txtHttps);
             this.Controls.Add(this.btnYahoo);
             this.Controls.Add(this.btnBack);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnForward);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnFb);
@@ -367,7 +348,6 @@
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnForward;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Timer tm;
         private System.Windows.Forms.Timer tmBack;

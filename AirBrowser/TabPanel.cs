@@ -10,23 +10,33 @@ using System.Windows.Forms;
 
 namespace AirBrowser
 {
-    class TabPanel 
+    partial class TabPanel 
     {
         public int position = 0;
-        int index = 0;
+        
+        private int index = 0;
         public int tabWidth = 200;
-        public  int indexOfSelectedButton = 1;
+        public int rmPosition = 0;
+        public  int indexOfSelectedButton = 0;
         public int indexOfSelectedPage = 0;
-        bool isMouseUp;
-        bool isHomeTabOpened = false;
-        int newLocation_X;
-        public string tag = "";
+        private bool isMouseUp;
+       
+        private int newLocation_X;
+        
         public List<Button> tabs = new List<Button>();
+        public Dictionary<Button, int> tab = new Dictionary<Button, int>();
         public List<Button> pages = new List<Button>();
+        public List<Button> rmPages = new List<Button>();
         public Button btnAddNewTab = new Button();
-        public Button pointer = new Button();
+        
+        public List<Button> removeButtons = new List<Button>();
+
+        Timer tmSlide = new Timer();
 
         public event EventHandler NewTab_Click_Done = delegate { };
+        public event EventHandler NewTab_MouseUp_Done = delegate { };
+        public event EventHandler RmNewTab_Click_Done = delegate { };
+        
 
        public TabPanel ()
         {
@@ -38,7 +48,22 @@ namespace AirBrowser
             btnAddNewTab.Location = new Point(0, -1);
             btnAddNewTab.MouseEnter += BtnAddNewTab_MouseEnter;
             btnAddNewTab.MouseLeave += BtnAddNewTab_MouseLeave;
+            tmSlide.Tick += TmSlide_Tick;
+
+            rmPosition = tabWidth - 19;
+
+        tmSlide.Interval = 1;
             
+            
+        }
+
+        private void SelectTab (object sender)
+        {
+            Button button = sender as Button;
+
+            indexOfSelectedButton = tabs.IndexOf(button);
+            indexOfSelectedPage = pages.IndexOf(button);
+            ChangeButtonStyleToBackground(indexOfSelectedButton);
         }
 
         private void BtnAddNewTab_MouseLeave(object sender, EventArgs e)
@@ -56,13 +81,74 @@ namespace AirBrowser
             return btnAddNewTab;
         }
 
+        public Button addNewRmTab ()
+        {
+            Button rmNewTab = new Button();
+
+            rmNewTab.Size = new Size(15, 15);
+            rmNewTab.BackgroundImage = Properties.Resources.PanelBtnRemove;
+            rmNewTab.TextAlign = ContentAlignment.MiddleLeft;
+            rmNewTab.FlatStyle = FlatStyle.Flat;
+            rmNewTab.FlatAppearance.BorderSize = 0;
+            rmNewTab.BackColor = Color.OrangeRed;
+            rmNewTab.Location = new Point(rmPosition, 8);
+            removeButtons.Add(rmNewTab);
+            rmNewTab.MouseEnter += RmNewTab_MouseEnter;
+            rmNewTab.MouseLeave += RmNewTab_MouseLeave;
+            rmPages.Add(rmNewTab);
+            //rmNewTab.Text = removeButtons.IndexOf(rmNewTab).ToString();
+
+            rmPosition += tabWidth;
+
+            rmNewTab.Click += RmNewTab_Click;
+
+            return rmNewTab;
+        }
+
+        private void RmNewTab_MouseLeave(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            if (removeButtons.IndexOf(button) != indexOfSelectedButton)
+                button.BackgroundImage = AirBrowser.Properties.Resources.btnRemovepanelBackground;
+            else button.BackgroundImage = AirBrowser.Properties.Resources.PanelBtnRemove;
+        }
+
+        private void RmNewTab_MouseEnter(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            if (removeButtons.IndexOf(button) != indexOfSelectedButton)
+                button.BackgroundImage = AirBrowser.Properties.Resources.btnRemovepanelHighlightBackground;
+            else button.BackgroundImage = AirBrowser.Properties.Resources.btnRemovepanelHighlight;
+
+        }
+
+        public int removeFromStaticList = 0;
+        public int removeFromNonStaticList = 0;
+        public void RmNewTab_Click(object sender, EventArgs e)
+        {
+
+            if (tabs.Count - 1 > 0)
+            {
+                Button button = sender as Button;
+                position -= tabWidth;
+                rmPosition -= tabWidth;
+
+                removeFromStaticList = rmPages.IndexOf(button);
+                removeFromNonStaticList = removeButtons.IndexOf(button);
+
+                
+                this.RmNewTab_Click_Done(this, new EventArgs());
+            }
+        }
 
         public Button addNewTab(string _tag)
         {
 
             Button newTab = new Button();
+            
+
             newTab.Tag = _tag;
-            newTab.Text = (!isHomeTabOpened) ? "New Tab" : "Home Tab";
+            newTab.Text = (_tag == "normal") ? "New Tab" : "Home Tab";
             newTab.BackgroundImage = AirBrowser.Properties.Resources.selectedTab;
             newTab.Size = new Size(tabWidth, 31);
             newTab.TextAlign = ContentAlignment.MiddleLeft;
@@ -80,6 +166,7 @@ namespace AirBrowser
             newTab.BringToFront();
             indexOfSelectedButton = tabs.Count - 1;
             position = position + tabWidth;
+           
             index++;
             ChangeButtonStyleToBackground(tabs.IndexOf(newTab));
             btnAddNewTab.Location = new Point(position, 0);
@@ -89,21 +176,21 @@ namespace AirBrowser
 
         public void NewTab_Click(object sender, EventArgs e)
         {
-            Button button = sender as Button;
-
-            indexOfSelectedButton = tabs.IndexOf(button);
-            indexOfSelectedPage = pages.IndexOf(button);
-            ChangeButtonStyleToBackground(indexOfSelectedButton);
+            SelectTab(sender);
             this.NewTab_Click_Done(this, new EventArgs());
 
         }
-
+        
         public void Reposition()
         {
             for (int i = 0; i < tabs.Count; i++)
+            {
                 tabs[i].Location = new Point(i * tabWidth, tabs[i].Location.Y);
+                removeButtons[i].Location = new Point((tabWidth-19)+ i* tabWidth, removeButtons[i].Location.Y);
+                removeButtons[i].BringToFront();
+            }
         }
-
+        
         private void swap(List<Button> list, int indexA, int indexB)
         {
 
@@ -111,12 +198,27 @@ namespace AirBrowser
             list[indexB] = list[indexA];
             list[indexA] = tmp;
 
-            for (int i = 0; i < list.Count; i++)
+            Button tmp2 = removeButtons[indexB];
+            removeButtons[indexB] = removeButtons[indexA];
+            removeButtons[indexA] = tmp2;
+
+
+            if (indexA > indexB)
             {
-                if (i != indexA)
-                    list[i].Location = new Point(i * tabWidth, list[i].Location.Y);
+                list[indexA].Location = new Point(list[indexA].Location.X + tabWidth, list[indexA].Location.Y);
+                removeButtons[indexA].Location = new Point(list[indexA].Location.X + (tabWidth-19), list[indexA].Location.Y + 8);
+
             }
-        }
+            else
+            {
+                list[indexA].Location = new Point(list[indexA].Location.X - tabWidth, list[indexA].Location.Y);
+                removeButtons[indexA].Location = new Point(list[indexA].Location.X + (tabWidth-19), list[indexA].Location.Y + 8);
+            }
+
+                //tmSlide.Enabled = false;
+
+
+            }
 
         public void ChangeButtonStyleToBackground(int index)
         {
@@ -125,11 +227,13 @@ namespace AirBrowser
                 if (i != index)
                 {
                     tabs[i].BackgroundImage = AirBrowser.Properties.Resources.unselectedTab;
+                    removeButtons[i].BackgroundImage = AirBrowser.Properties.Resources.btnRemovepanelBackground;
                     tabs[i].ForeColor = Color.DimGray;
                 }
                 else
                 {
                     tabs[i].BackgroundImage = AirBrowser.Properties.Resources.selectedTab;
+                    removeButtons[i].BackgroundImage = AirBrowser.Properties.Resources.PanelBtnRemove;
                     tabs[i].ForeColor = Color.Black;
                 }
             }
@@ -137,6 +241,7 @@ namespace AirBrowser
 
         private void NewTab_MouseDown(object sender, MouseEventArgs e)
         {
+            SelectTab(sender);
             isMouseUp = true;
         }
 
@@ -144,48 +249,68 @@ namespace AirBrowser
         {
             if (isMouseUp)
             {
-
+                btnAddNewTab.Visible = false;
                 Button button = sender as Button;
                 newLocation_X = (tabWidth * (tabs.IndexOf(button) + 1));
                 button.BringToFront();
+                
+                removeButtons[tabs.IndexOf(button)].Location = new Point(button.Location.X+(tabWidth-19), button.Location.Y+8);
                 button.Location = new Point(button.Location.X + e.Location.X - (tabWidth / 2), button.Location.Y);
 
-                for (int i = 0; i < tabs.Count; i++)
-                    if (button.Location.X < tabs[i].Location.X + (tabWidth / 2))
-                    {
-                        swap(tabs, tabs.IndexOf(button), i);
-                        break;
-                    }
+                
 
-                for (int i = tabs.Count - 1; i > 0; --i)
-                    if ((button.Location.X > tabs[i].Location.X) && tabs.IndexOf(button) < i)
+                if (tabs.IndexOf(button) != 0 ) {
+                   
+                    if (button.Location.X < ((Button)tabs[tabs.IndexOf(button) - 1]).Location.X + (tabWidth / 2))
                     {
-                        swap(tabs, i, tabs.IndexOf(button));
-                        break;
+                        swap(tabs, tabs.IndexOf(button), tabs.IndexOf(button) - 1);
                     }
+                    
+                }
+
+                if (tabs.IndexOf(button) != tabs.Count-1)
+                {
+                    if ((button.Location.X > ((Button)tabs[tabs.IndexOf(button) + 1]).Location.X))
+                    {
+                        swap(tabs, tabs.IndexOf(button),  tabs.IndexOf(button) + 1);
+                    }
+                }
+
             }
         }
 
         private void NewTab_MouseUp(object sender, MouseEventArgs e)
         {
+            btnAddNewTab.Visible = true;
             isMouseUp = false;
             Button button = sender as Button;
+   
+            SelectTab(sender);
+
             newLocation_X = tabWidth * tabs.IndexOf(button);
             button.Location = new Point(newLocation_X, button.Location.Y);
+
+            removeButtons[tabs.IndexOf(button)].Location = new Point(button.Location.X + (tabWidth - 19), button.Location.Y + 8);
+            for (int i = 0; i < removeButtons.Count; i++) removeButtons[i].BringToFront();
+
+            this.NewTab_MouseUp_Done(this, new EventArgs());
         }
 
         private void NewTab_MouseLeave(object sender, EventArgs e)
         {
-            Button button = sender as Button;
-            if (indexOfSelectedButton != tabs.IndexOf(button))
-                button.BackgroundImage = AirBrowser.Properties.Resources.unselectedTab;
+            
+                Button button = sender as Button;
+                if (indexOfSelectedButton != tabs.IndexOf(button))
+                    button.BackgroundImage = AirBrowser.Properties.Resources.unselectedTab;
+            
         }
 
         private void NewTab_MouseEnter(object sender, EventArgs e)
         {
-            Button button = sender as Button;
-            if (indexOfSelectedButton != tabs.IndexOf(button))
-                button.BackgroundImage = AirBrowser.Properties.Resources.unselectedTabHighlight;
+                Button button = sender as Button;
+                if (indexOfSelectedButton != tabs.IndexOf(button))
+                    button.BackgroundImage = AirBrowser.Properties.Resources.unselectedTabHighlight;
+            
         }
 
        
