@@ -9,9 +9,9 @@ namespace AirBrowser
       
         private void ShowValidUrl()
         {
-            string fullUrL = Convert.ToString(((WebBrowser)tabControl.SelectedTab.Controls[0]).Url);
+           // string fullUrL = Convert.ToString(((WebBrowser)tabControl.SelectedTab.Controls[0]).Url);
            // string shortenUrl = fullUrL.Remove(0, 7);
-            txtNavigate.Text = fullUrL;
+           // txtNavigate.Text = fullUrL;
         }
      
         private void HomeLayout(TabPage parentTab)

@@ -30,9 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.tabControl = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.tm = new System.Windows.Forms.Timer(this.components);
             this.tmBack = new System.Windows.Forms.Timer(this.components);
@@ -49,44 +46,11 @@
             this.btnForward = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.picGradient = new System.Windows.Forms.PictureBox();
-            this.tabControl.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabChrome = new System.Windows.Forms.TabControl();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picGradient)).BeginInit();
             this.SuspendLayout();
-            // 
-            // tabControl
-            // 
-            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl.Controls.Add(this.tabPage1);
-            this.tabControl.ItemSize = new System.Drawing.Size(100, 0);
-            this.tabControl.Location = new System.Drawing.Point(-4, 63);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1285, 645);
-            this.tabControl.TabIndex = 7;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.webBrowser);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1277, 619);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // webBrowser
-            // 
-            this.webBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser.Location = new System.Drawing.Point(0, 0);
-            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser.Name = "webBrowser";
-            this.webBrowser.Size = new System.Drawing.Size(1277, 619);
-            this.webBrowser.TabIndex = 6;
             // 
             // fileSystemWatcher1
             // 
@@ -288,12 +252,24 @@
             this.picGradient.TabIndex = 17;
             this.picGradient.TabStop = false;
             // 
+            // tabChrome
+            // 
+            this.tabChrome.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabChrome.Location = new System.Drawing.Point(-6, 64);
+            this.tabChrome.Name = "tabChrome";
+            this.tabChrome.SelectedIndex = 0;
+            this.tabChrome.Size = new System.Drawing.Size(1286, 643);
+            this.tabChrome.TabIndex = 7;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1276, 703);
+            this.Controls.Add(this.tabChrome);
             this.Controls.Add(this.btnNavigate);
             this.Controls.Add(this.txtNavigate);
             this.Controls.Add(this.btnHome);
@@ -306,7 +282,6 @@
             this.Controls.Add(this.btnTwitch);
             this.Controls.Add(this.btn9gag);
             this.Controls.Add(this.picGradient);
-            this.Controls.Add(this.tabControl);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.White;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -315,8 +290,6 @@
             this.Text = "Bricksplorer";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
-            this.tabControl.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picGradient)).EndInit();
@@ -330,9 +303,6 @@
 
 
         #endregion
-        private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnForward;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
@@ -349,6 +319,7 @@
         private System.Windows.Forms.ComboBox txtNavigate;
         private System.Windows.Forms.FlowLayoutPanel homePanel;
         private System.Windows.Forms.Button btnNavigate;
+        private System.Windows.Forms.TabControl tabChrome;
     }
 }
 
