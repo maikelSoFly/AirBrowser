@@ -16,10 +16,10 @@ namespace AirBrowser
         private bool isMouseUp;
         private int newLocation_X;
         public List<Button> tabs = new List<Button>();
+        public List<Button> removeButtons = new List<Button>();
         public List<Button> pages = new List<Button>();
         public List<Button> rmPages = new List<Button>();
         public Button btnAddNewTab = new Button();
-        public List<Button> removeButtons = new List<Button>();
         public event EventHandler NewTab_Click_Done = delegate { };
         public event EventHandler NewTab_MouseUp_Done = delegate { };
         public event EventHandler RmNewTab_Click_Done = delegate { };
@@ -157,15 +157,15 @@ namespace AirBrowser
             }
         }
         
-        private void swap(List<Button> list, int indexA, int indexB)
+        private void swap(List<Button> list, List<Button> list2 , int indexA, int indexB)
         {
             Button tmp = list[indexB];
             list[indexB] = list[indexA];
             list[indexA] = tmp;
 
-            Button tmp2 = removeButtons[indexB];
-            removeButtons[indexB] = removeButtons[indexA];
-            removeButtons[indexA] = tmp2;
+            Button tmp2 = list2[indexB];
+            list2[indexB] = list2[indexA];
+            list2[indexA] = tmp2;
 
             if (indexA > indexB)
             {
@@ -222,7 +222,7 @@ namespace AirBrowser
                   {
                       if (button.Location.X < ((Button)tabs[tabs.IndexOf(button) - 1]).Location.X + (tabWidth / 2))
                       {
-                          swap(tabs, tabs.IndexOf(button), tabs.IndexOf(button) - 1);
+                          swap(tabs, removeButtons, tabs.IndexOf(button), tabs.IndexOf(button) - 1);
                       }
                   }
 
@@ -230,7 +230,7 @@ namespace AirBrowser
                 {
                     if ((button.Location.X > ((Button)tabs[tabs.IndexOf(button) + 1]).Location.X))
                     {
-                          swap(tabs, tabs.IndexOf(button), tabs.IndexOf(button) + 1);
+                          swap(tabs, removeButtons, tabs.IndexOf(button), tabs.IndexOf(button) + 1);
                     }
                 }
             }
