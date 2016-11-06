@@ -1,5 +1,4 @@
-﻿
-using CefSharp;
+﻿using CefSharp;
 using CefSharp.WinForms;
 using System;
 using System.Drawing;
@@ -16,65 +15,48 @@ namespace AirBrowser
             InitializeComponent();
         }
 
-        // Variables
-      
-        WebBrowser webTab = null;
         int location;
         int buttonSize = 150;
         TabPanel panel = new TabPanel();
-
-    
-        ChromiumWebBrowser chrome;
+        
 
         private void Form1_Load(object sender, EventArgs e) {
 
             CefSettings settings = new CefSettings();
             Cef.Initialize(settings);
-            //  webTab1 = new ChromiumWebBrowser("https://youtube.com");
-            //chromePanel.Controls.Add(webTab1);
-            // webTab1.Dock = DockStyle.Fill;
-            //var page = new ChromiumWebBrowser("https://google.com");
-           // var tab = new TabPage();
-           // tab.Controls.Add(page);
-           // page.Dock = DockStyle.Fill;
-            //tabChrome.Controls.Add(tab);
-           
-
-            //tabControl.Controls.RemoveAt(0);
-           // tabChrome.Controls.RemoveAt(0);
+            panel.formWidth = this.Size.Width;
+            
             location = btnNavigate.Location.X + 4;
             Controls.Add(panel.add_btnAddNewTab());
             BtnAddNewTab_Click(sender, e);              
             txtHttps.Text = "https://";
-            // Hide original tabs buttons
-            //tabChrome.Appearance = TabAppearance.FlatButtons;
             tabChrome.ItemSize = new Size(0, 1);
-            //tabChrome.SizeMode = TabSizeMode.Fixed;
-            //
             tabChrome.SendToBack();
             panel.btnAddNewTab.Click += BtnAddNewTab_Click;
             btnBack.MouseEnter += BtnBack_MouseEnter;
             btnBack.MouseLeave += BtnBack_MouseLeave;
-            
+            panel.formWidth = this.Size.Width;
+            panel.maxTabs = (this.Size.Width / panel.tabWidth)-1;
             panel.NewTab_Click_Done += new EventHandler(On_NewTab_Click_Done);
             panel.NewTab_MouseUp_Done += new EventHandler(On_NewTab_MouseUp_Done);
             panel.RmNewTab_Click_Done += new EventHandler(On_RmNewTab_Click_Done);
-           // webBrowser.WebBrowserShortcutsEnabled = true;
         }
 
         void On_RmNewTab_Click_Done(object sender, EventArgs e)
         {
             if (tabChrome.TabPages.Count - 1 > 0)
             {
+                
                 int removeFromStaticList = panel.removeFromStaticList;
                 int removeFromNonStaticList = panel.removeFromNonStaticList;
+              
                 Controls.Remove(panel.removeButtons[removeFromNonStaticList]);
                 Controls.Remove(panel.tabs[removeFromNonStaticList]);
-                tabChrome.TabPages.RemoveAt(removeFromStaticList);
                 panel.tabs.RemoveAt(removeFromNonStaticList);
                 panel.rmPages.RemoveAt(removeFromStaticList);
                 panel.pages.RemoveAt(removeFromStaticList);
                 panel.removeButtons.RemoveAt(removeFromNonStaticList);
+                tabChrome.TabPages[removeFromStaticList].Dispose();
 
                 if (removeFromNonStaticList < panel.indexOfSelectedButton)
                 {
@@ -87,7 +69,7 @@ namespace AirBrowser
 
                 panel.ChangeButtonStyleToBackground(panel.indexOfSelectedButton);
                 panel.Reposition();
-                panel.btnAddNewTab.Location = new Point(panel.btnAddNewTab.Location.X - panel.tabWidth, panel.btnAddNewTab.Location.Y);
+                
             }
         }
 
@@ -95,7 +77,7 @@ namespace AirBrowser
         {
             tabChrome.SelectedIndex = panel.indexOfSelectedPage;
             Form1_SizeChanged(sender, e);
-             ShowValidUrl();
+            ShowValidUrl();
         }
 
         void On_NewTab_Click_Done(object sender, EventArgs e) 
@@ -108,41 +90,54 @@ namespace AirBrowser
 
         private void BtnAddNewTab_Click(object sender, EventArgs e)
         {
-           
-            //TabPage tab = new TabPage();
-            
-           
-            
-           // var chrome = new ChromiumWebBrowser("https://youtube.com");
-            //webTab = new WebBrowser() { ScriptErrorsSuppressed = true };
-            //tab.Controls.Add(chrome);
-            //tabControl.Controls.Add(tab);
-
-           // tabControl.SelectTab(tabControl.TabCount - 1);
             var page = new ChromiumWebBrowser("https://google.com");
+            
             page.Dock = DockStyle.Fill;
             var tab = new TabPage();
+            tab.Tag = "Google";
             page.Parent = tab;
-            
-            tabChrome.Controls.Add(tab);
+            tabChrome.TabPages.Add(tab);
+            page.Tag = tabChrome.TabCount - 1;
             tabChrome.SelectTab(tabChrome.TabCount - 1);
-
             page.TitleChanged += Page_TitleChanged;
-            //webTab.Dock = DockStyle.Fill;
-            //webTab.Navigate("https://google.com");
+            page.AddressChanged += Page_AddressChanged;
             txtNavigate.Text = "www.google.com";
             Controls.Add(panel.addNewRmTab());
-            Controls.Add(panel.addNewTab("normal"));
-            //webTab.DocumentCompleted += WebTab_DocumentCompleted;
-           //webTab.DocumentTitleChanged += WebTab_DocumentTitleChanged;
+            Controls.Add(panel.addNewTab("Google"));
         }
 
-        private void Page_TitleChanged(object sender, TitleChangedEventArgs e)
+        private void Page_AddressChanged(object sender, AddressChangedEventArgs e)
         {
             this.Invoke(new MethodInvoker(() =>
             {
-                panel.tabs[panel.indexOfSelectedButton].Text = e.Title;
+                ShowValidUrl();
             }));
+        }
+        string title = "";
+        int space = 0;
+        private void Page_TitleChanged(object sender, TitleChangedEventArgs e)
+        {
+            ChromiumWebBrowser web = sender as ChromiumWebBrowser;
+            int index = tabChrome.TabPages.IndexOf((TabPage)web.Parent);
+
+            this.Invoke(new MethodInvoker(() =>
+            {
+                panel.pages[index].Tag = e.Title;
+                panel.pages[index].Text = fitTitle(e.Title);
+            }));
+        }
+
+        private string fitTitle (string e)
+        {
+            title = e;
+            space = (int)(panel.tabWidth * 0.135 -4);
+            if (title.Length > space)
+            {
+                title = title.Remove(space);
+                title = title.Insert(space, "...");
+            }
+            return title;
+            
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -173,19 +168,7 @@ namespace AirBrowser
                 web.Load(txtNavigate.Text);
             }
         }
-       
-       // private void WebTab_DocumentTitleChanged(object sender, EventArgs e)
-       // {
-         //  panel.tabs[panel.indexOfSelectedButton].Text = ((WebBrowser)tabControl.SelectedTab.Controls[0]).Document.Title;
-      //  }
-   
-       // private void WebTab_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        //{
-        //    panel.tabs[panel.indexOfSelectedButton].Text = ((WebBrowser)tabControl.SelectedTab.Controls[0]).Document.Title;
-        //    ShowValidUrl();
-        //    tabControl.Focus();
-      //  }
-
+ 
         private void txtNavigate_Click(object sender, EventArgs e)
         {
             txtNavigate.SelectionStart = 0;
@@ -194,7 +177,16 @@ namespace AirBrowser
 
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
-            location = btnNavigate.Location.X+4;
+            panel.formWidth = this.Size.Width;
+            panel.fillTabs();
+            
+            for (int i = 0; i < panel.tabs.Count; i++)
+            {
+                panel.tabs[i].Text = fitTitle(panel.tabs[i].Tag.ToString());
+            }
+
+
+            //location = btnNavigate.Location.X+4;
             buttonSize = this.Size.Width / 9;
             homePanel.Size = new Size(3 * buttonSize + 18, 3 * buttonSize + 18);
             homePanel.Location = new Point(this.Size.Width / 2 - (3 * buttonSize + 18) / 2 -9, 80);
@@ -231,14 +223,14 @@ namespace AirBrowser
             //tabControl.Controls.Add(homeTab);
             //tabControl.SelectTab(tabControl.TabCount - 1);
            // webTab = new WebBrowser { ScriptErrorsSuppressed = true };
-            webTab.Parent = homeTab;
-           webTab.Dock = DockStyle.Fill;
-            webTab.Url = null;
+            //webTab.Parent = homeTab;
+          // webTab.Dock = DockStyle.Fill;
+           // webTab.Url = null;
             Controls.Add(panel.addNewRmTab());
             Controls.Add(panel.addNewTab("home"));
             HomeLayout(homeTab);
-            webTab.Visible = false;
-            ShowValidUrl();
+           // webTab.Visible = false;
+            //ShowValidUrl();
         }
 
         private void txtNavigate_KeyDown(object sender, KeyEventArgs e)

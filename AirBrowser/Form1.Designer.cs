@@ -74,7 +74,7 @@
             this.btnFb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFb.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btnFb.ForeColor = System.Drawing.Color.Black;
-            this.btnFb.Location = new System.Drawing.Point(378, 37);
+            this.btnFb.Location = new System.Drawing.Point(378, 38);
             this.btnFb.Name = "btnFb";
             this.btnFb.Size = new System.Drawing.Size(73, 30);
             this.btnFb.TabIndex = 12;
@@ -89,7 +89,7 @@
             this.btn9gag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn9gag.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btn9gag.ForeColor = System.Drawing.Color.Black;
-            this.btn9gag.Location = new System.Drawing.Point(453, 37);
+            this.btn9gag.Location = new System.Drawing.Point(453, 38);
             this.btn9gag.Name = "btn9gag";
             this.btn9gag.Size = new System.Drawing.Size(73, 30);
             this.btn9gag.TabIndex = 13;
@@ -104,7 +104,7 @@
             this.btnTwitch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTwitch.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btnTwitch.ForeColor = System.Drawing.Color.Black;
-            this.btnTwitch.Location = new System.Drawing.Point(528, 37);
+            this.btnTwitch.Location = new System.Drawing.Point(528, 38);
             this.btnTwitch.Name = "btnTwitch";
             this.btnTwitch.Size = new System.Drawing.Size(73, 30);
             this.btnTwitch.TabIndex = 14;
@@ -119,7 +119,7 @@
             this.btnYahoo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnYahoo.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btnYahoo.ForeColor = System.Drawing.Color.Black;
-            this.btnYahoo.Location = new System.Drawing.Point(604, 37);
+            this.btnYahoo.Location = new System.Drawing.Point(604, 38);
             this.btnYahoo.Name = "btnYahoo";
             this.btnYahoo.Size = new System.Drawing.Size(73, 30);
             this.btnYahoo.TabIndex = 16;
@@ -133,17 +133,20 @@
             this.txtHttps.BackColor = System.Drawing.Color.White;
             this.txtHttps.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txtHttps.ForeColor = System.Drawing.Color.Green;
-            this.txtHttps.Location = new System.Drawing.Point(100, 42);
+            this.txtHttps.Location = new System.Drawing.Point(103, 43);
             this.txtHttps.Name = "txtHttps";
-            this.txtHttps.Size = new System.Drawing.Size(38, 13);
+            this.txtHttps.Size = new System.Drawing.Size(10, 13);
             this.txtHttps.TabIndex = 19;
-            this.txtHttps.Text = "label1";
+            this.txtHttps.Text = "l";
+            this.txtHttps.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtNavigate
             // 
             this.txtNavigate.AutoCompleteCustomSource.AddRange(new string[] {
             "9gag.com",
-            "facebook.com"});
+            "facebook.com",
+            "youtube.com",
+            "github.com"});
             this.txtNavigate.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txtNavigate.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txtNavigate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;

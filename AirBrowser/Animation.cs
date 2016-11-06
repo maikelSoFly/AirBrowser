@@ -6,8 +6,6 @@ namespace AirBrowser
 {
     public partial class Form1 : Form
     {
-        // Animation
-
         private void txtNavigate_MouseEnter(object sender, EventArgs e)
         {
             tmBack.Enabled = false;

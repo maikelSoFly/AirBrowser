@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CefSharp.WinForms;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -9,9 +10,21 @@ namespace AirBrowser
       
         private void ShowValidUrl()
         {
-           // string fullUrL = Convert.ToString(((WebBrowser)tabControl.SelectedTab.Controls[0]).Url);
-           // string shortenUrl = fullUrL.Remove(0, 7);
-           // txtNavigate.Text = fullUrL;
+            string shortenUrl = "";
+            string adress = Convert.ToString( ((ChromiumWebBrowser)tabChrome.SelectedTab.Controls[0]).Address);
+            if ( adress.Contains("https"))
+            {
+                shortenUrl = adress.Remove(0, 8);
+                txtHttps.Text = "https://";
+                txtHttps.Location = new Point(103, 43);
+            }
+            else if (adress.Contains("http")) {
+                shortenUrl = adress.Remove(0, 7);
+                txtHttps.Text = "http://";
+                txtHttps.Location = new Point(107, 43);
+            }
+            txtNavigate.Text = shortenUrl;
+            tabChrome.Focus();
         }
      
         private void HomeLayout(TabPage parentTab)

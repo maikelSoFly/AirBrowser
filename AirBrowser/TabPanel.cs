@@ -23,6 +23,8 @@ namespace AirBrowser
         public event EventHandler NewTab_Click_Done = delegate { };
         public event EventHandler NewTab_MouseUp_Done = delegate { };
         public event EventHandler RmNewTab_Click_Done = delegate { };
+        public int maxTabs = 5;
+        public int formWidth = 1000;
         
 
        public TabPanel ()
@@ -104,19 +106,18 @@ namespace AirBrowser
             if (tabs.Count - 1 > 0)
             {
                 Button button = sender as Button;
-                position -= tabWidth;
-                rmPosition -= tabWidth;
+                fillTabs();
                 removeFromStaticList = rmPages.IndexOf(button);
                 removeFromNonStaticList = removeButtons.IndexOf(button);
                 this.RmNewTab_Click_Done(this, new EventArgs());
             }
         }
-
+        
         public Button addNewTab(string _tag)
         {
             Button newTab = new Button();
             newTab.Tag = _tag;
-            newTab.Text = (_tag == "normal") ? "New Tab" : "Home Tab";
+            newTab.Text = (_tag == "Google") ? "New Tab" : "Home Tab";
             newTab.BackgroundImage = AirBrowser.Properties.Resources.selectedTab;
             newTab.Size = new Size(tabWidth, 31);
             newTab.TextAlign = ContentAlignment.MiddleLeft;
@@ -137,9 +138,19 @@ namespace AirBrowser
             index++;
             ChangeButtonStyleToBackground(tabs.IndexOf(newTab));
             btnAddNewTab.Location = new Point(position, 0);
-            
-            return newTab;
+
+            fillTabs();
+
+                return newTab;
         }
+
+        public void fillTabs ()
+        {
+            if (tabs.Count * 200 + 30 >= formWidth) tabWidth = formWidth/ (tabs.Count+1);
+            else tabWidth = 200;
+            Reposition();
+        }
+        
 
         public void NewTab_Click(object sender, EventArgs e)
         {
@@ -152,9 +163,14 @@ namespace AirBrowser
             for (int i = 0; i < tabs.Count; i++)
             {
                 tabs[i].Location = new Point(i * tabWidth, tabs[i].Location.Y);
+                tabs[i].Size = new Size(tabWidth, tabs[i].Size.Height);
+                
                 removeButtons[i].Location = new Point((tabWidth-19)+ i* tabWidth, removeButtons[i].Location.Y);
                 removeButtons[i].BringToFront();
             }
+            btnAddNewTab.Location = new Point(tabs.Count * tabWidth, btnAddNewTab.Location.Y);
+            position = tabs[tabs.Count-1].Location.X+tabWidth;
+            rmPosition = removeButtons[tabs.Count-1].Location.X + tabWidth;
         }
         
         private void swap(List<Button> list, List<Button> list2 , int indexA, int indexB)
